@@ -12,5 +12,6 @@ namespace IBLL
     public partial interface IBLLSession
     {
 
+
     }
 }
