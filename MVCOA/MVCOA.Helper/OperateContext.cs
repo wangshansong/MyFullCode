@@ -12,6 +12,7 @@ namespace MVCOA.Helper
     /// </summary>
     public static class OperateContext
     {
+
        public static  IBLLSession BLLSession = DI.SpringHelper.GetObject<IBLLSession>("BLLSession");
     }
 }
