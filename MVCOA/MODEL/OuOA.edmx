@@ -1,0 +1,1431 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="OuOAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bill_Leave">
+          <Key>
+            <PropertyRef Name="Leave" />
+          </Key>
+          <Property Name="Leave" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="BeginDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="BillStateID" Type="int" />
+          <Property Name="WorkFlowID" Type="int" />
+        </EntityType>
+        <EntityType Name="Ou_Department">
+          <Key>
+            <PropertyRef Name="depId" />
+          </Key>
+          <Property Name="depId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="depPid" Type="int" Nullable="false" />
+          <Property Name="depName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="depRemark" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="depIsDel" Type="bit" Nullable="false" />
+          <Property Name="depAddTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ou_Permission">
+          <Key>
+            <PropertyRef Name="pid" />
+          </Key>
+          <Property Name="pid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pParent" Type="int" Nullable="false" />
+          <Property Name="pName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pAreaName" Type="varchar" MaxLength="50" />
+          <Property Name="pControllerName" Type="varchar" MaxLength="50" />
+          <Property Name="pActionName" Type="varchar" MaxLength="50" />
+          <Property Name="pFormMethod" Type="smallint" Nullable="false" />
+          <Property Name="pOperationType" Type="smallint" Nullable="false" />
+          <Property Name="pIco" Type="varchar" MaxLength="200" />
+          <Property Name="pOrder" Type="int" Nullable="false" />
+          <Property Name="pIsLink" Type="bit" Nullable="false" />
+          <Property Name="pLinkUrl" Type="varchar" MaxLength="200" />
+          <Property Name="pIsShow" Type="bit" Nullable="false" />
+          <Property Name="pRemark" Type="varchar" MaxLength="200" />
+          <Property Name="pIsDel" Type="bit" Nullable="false" />
+          <Property Name="pAddTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ou_Role">
+          <Key>
+            <PropertyRef Name="rId" />
+          </Key>
+          <Property Name="rId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rDepId" Type="int" Nullable="false" />
+          <Property Name="rName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="rRemark" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="rIsShow" Type="bit" Nullable="false" />
+          <Property Name="rIsDel" Type="bit" Nullable="false" />
+          <Property Name="rAddTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ou_RolePermission">
+          <Key>
+            <PropertyRef Name="rpId" />
+          </Key>
+          <Property Name="rpId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rpRId" Type="int" Nullable="false" />
+          <Property Name="rpPId" Type="int" Nullable="false" />
+          <Property Name="rpIsDel" Type="bit" Nullable="false" />
+          <Property Name="rpAddTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ou_UserInfo">
+          <Key>
+            <PropertyRef Name="uId" />
+          </Key>
+          <Property Name="uId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uDepId" Type="int" Nullable="false" />
+          <Property Name="uLoginName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="uPwd" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="uGender" Type="bit" Nullable="false" />
+          <Property Name="uPost" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="uRemark" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="uIsDel" Type="bit" Nullable="false" />
+          <Property Name="uAddTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ou_UserRole">
+          <Key>
+            <PropertyRef Name="urId" />
+          </Key>
+          <Property Name="urId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="urUId" Type="int" Nullable="false" />
+          <Property Name="urRId" Type="int" Nullable="false" />
+          <Property Name="urIsDel" Type="bit" Nullable="false" />
+          <Property Name="urAddtime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ou_UserVipPermission">
+          <Key>
+            <PropertyRef Name="vipId" />
+          </Key>
+          <Property Name="vipId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vipUserId" Type="int" Nullable="false" />
+          <Property Name="vipPermission" Type="int" Nullable="false" />
+          <Property Name="vipRemark" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="vipIsDel" Type="bit" Nullable="false" />
+          <Property Name="vipAddTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="WF_AutoTransactNode">
+          <Key>
+            <PropertyRef Name="AutoTransactNodeID" />
+          </Key>
+          <Property Name="AutoTransactNodeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkFlowNodeID" Type="int" />
+        </EntityType>
+        <EntityType Name="WF_BillFlowNode">
+          <Key>
+            <PropertyRef Name="BillFlowNodeID" />
+          </Key>
+          <Property Name="BillFlowNodeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkFlowNodeID" Type="int" />
+          <Property Name="NodeStateID" Type="int" />
+          <Property Name="WorkFlowID" Type="int" />
+          <Property Name="BillID" Type="int" />
+        </EntityType>
+        <EntityType Name="WF_BillFlowNodeRemark">
+          <Key>
+            <PropertyRef Name="BillFlowNodeRemarkID" />
+          </Key>
+          <Property Name="BillFlowNodeRemarkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BillFlowNodeID" Type="int" />
+          <Property Name="TransactorID" Type="int" />
+          <Property Name="Transactor" Type="nvarchar" MaxLength="50" />
+          <Property Name="TransactorDate" Type="datetime" />
+          <Property Name="TransactorOperation" Type="nvarchar" MaxLength="50" />
+          <Property Name="TransactorRemark" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="WF_BillState">
+          <Key>
+            <PropertyRef Name="BillStateID" />
+          </Key>
+          <Property Name="BillStateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BillStateName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="WF_Node">
+          <Key>
+            <PropertyRef Name="NodeID" />
+          </Key>
+          <Property Name="NodeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NodeName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="WF_NodeState">
+          <Key>
+            <PropertyRef Name="NodeStateID" />
+          </Key>
+          <Property Name="NodeStateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NodeStateName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="WF_WorkFlow">
+          <Key>
+            <PropertyRef Name="WorkFlowID" />
+          </Key>
+          <Property Name="WorkFlowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkFlowName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="WF_WorkFlowNode">
+          <Key>
+            <PropertyRef Name="WorkFlowNodeID" />
+          </Key>
+          <Property Name="WorkFlowNodeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkFlowID" Type="int" />
+          <Property Name="NodeID" Type="int" />
+          <Property Name="WorkFlowNodeSequence" Type="int" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_BILL_LEAVE_REFERENCE_10_WF_BILLSTATE">
+          <End Role="WF_BillState" Type="Self.WF_BillState" Multiplicity="0..1" />
+          <End Role="Bill_Leave" Type="Self.Bill_Leave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_BillState">
+              <PropertyRef Name="BillStateID" />
+            </Principal>
+            <Dependent Role="Bill_Leave">
+              <PropertyRef Name="BillStateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BILL_LEAVE_REFERENCE_11_WF_WORKFLOW">
+          <End Role="WF_WorkFlow" Type="Self.WF_WorkFlow" Multiplicity="0..1" />
+          <End Role="Bill_Leave" Type="Self.Bill_Leave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_WorkFlow">
+              <PropertyRef Name="WorkFlowID" />
+            </Principal>
+            <Dependent Role="Bill_Leave">
+              <PropertyRef Name="WorkFlowID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ou_Role_Ou_Department">
+          <End Role="Ou_Department" Type="Self.Ou_Department" Multiplicity="1" />
+          <End Role="Ou_Role" Type="Self.Ou_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ou_Department">
+              <PropertyRef Name="depId" />
+            </Principal>
+            <Dependent Role="Ou_Role">
+              <PropertyRef Name="rDepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ou_RolePermission_Ou_Permission">
+          <End Role="Ou_Permission" Type="Self.Ou_Permission" Multiplicity="1" />
+          <End Role="Ou_RolePermission" Type="Self.Ou_RolePermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ou_Permission">
+              <PropertyRef Name="pid" />
+            </Principal>
+            <Dependent Role="Ou_RolePermission">
+              <PropertyRef Name="rpPId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ou_RolePermission_Ou_Role">
+          <End Role="Ou_Role" Type="Self.Ou_Role" Multiplicity="1" />
+          <End Role="Ou_RolePermission" Type="Self.Ou_RolePermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ou_Role">
+              <PropertyRef Name="rId" />
+            </Principal>
+            <Dependent Role="Ou_RolePermission">
+              <PropertyRef Name="rpRId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ou_UserInfo_Ou_Department">
+          <End Role="Ou_Department" Type="Self.Ou_Department" Multiplicity="1" />
+          <End Role="Ou_UserInfo" Type="Self.Ou_UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ou_Department">
+              <PropertyRef Name="depId" />
+            </Principal>
+            <Dependent Role="Ou_UserInfo">
+              <PropertyRef Name="uDepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ou_UserRole_Ou_Role">
+          <End Role="Ou_Role" Type="Self.Ou_Role" Multiplicity="1" />
+          <End Role="Ou_UserRole" Type="Self.Ou_UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ou_Role">
+              <PropertyRef Name="rId" />
+            </Principal>
+            <Dependent Role="Ou_UserRole">
+              <PropertyRef Name="urRId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ou_UserRole_Ou_UserInfo">
+          <End Role="Ou_UserInfo" Type="Self.Ou_UserInfo" Multiplicity="1" />
+          <End Role="Ou_UserRole" Type="Self.Ou_UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ou_UserInfo">
+              <PropertyRef Name="uId" />
+            </Principal>
+            <Dependent Role="Ou_UserRole">
+              <PropertyRef Name="urUId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ou_UserVipPermission_Ou_Permission">
+          <End Role="Ou_Permission" Type="Self.Ou_Permission" Multiplicity="1" />
+          <End Role="Ou_UserVipPermission" Type="Self.Ou_UserVipPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ou_Permission">
+              <PropertyRef Name="pid" />
+            </Principal>
+            <Dependent Role="Ou_UserVipPermission">
+              <PropertyRef Name="vipPermission" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ou_UserVipPermission_Ou_UserInfo">
+          <End Role="Ou_UserInfo" Type="Self.Ou_UserInfo" Multiplicity="1" />
+          <End Role="Ou_UserVipPermission" Type="Self.Ou_UserVipPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ou_UserInfo">
+              <PropertyRef Name="uId" />
+            </Principal>
+            <Dependent Role="Ou_UserVipPermission">
+              <PropertyRef Name="vipUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WF_AUTOTRANSACTNOD_REFERENCE_4_WF_WORKFLOWNODE">
+          <End Role="WF_WorkFlowNode" Type="Self.WF_WorkFlowNode" Multiplicity="0..1" />
+          <End Role="WF_AutoTransactNode" Type="Self.WF_AutoTransactNode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_WorkFlowNode">
+              <PropertyRef Name="WorkFlowNodeID" />
+            </Principal>
+            <Dependent Role="WF_AutoTransactNode">
+              <PropertyRef Name="WorkFlowNodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WF_BILLFLOWNODE_REFERENCE_6_WF_WORKFLOWNODE">
+          <End Role="WF_WorkFlowNode" Type="Self.WF_WorkFlowNode" Multiplicity="0..1" />
+          <End Role="WF_BillFlowNode" Type="Self.WF_BillFlowNode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_WorkFlowNode">
+              <PropertyRef Name="WorkFlowNodeID" />
+            </Principal>
+            <Dependent Role="WF_BillFlowNode">
+              <PropertyRef Name="WorkFlowNodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WF_BILLFLOWNODE_REFERENCE_7_WF_NODESTATE">
+          <End Role="WF_NodeState" Type="Self.WF_NodeState" Multiplicity="0..1" />
+          <End Role="WF_BillFlowNode" Type="Self.WF_BillFlowNode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_NodeState">
+              <PropertyRef Name="NodeStateID" />
+            </Principal>
+            <Dependent Role="WF_BillFlowNode">
+              <PropertyRef Name="NodeStateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WF_BILLFLOWNODE_REFERENCE_8_WF_WORKFLOW">
+          <End Role="WF_WorkFlow" Type="Self.WF_WorkFlow" Multiplicity="0..1" />
+          <End Role="WF_BillFlowNode" Type="Self.WF_BillFlowNode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_WorkFlow">
+              <PropertyRef Name="WorkFlowID" />
+            </Principal>
+            <Dependent Role="WF_BillFlowNode">
+              <PropertyRef Name="WorkFlowID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WF_BILLFLOWNODEREM_REFERENCE_9_WF_BILLFLOWNODE">
+          <End Role="WF_BillFlowNode" Type="Self.WF_BillFlowNode" Multiplicity="0..1" />
+          <End Role="WF_BillFlowNodeRemark" Type="Self.WF_BillFlowNodeRemark" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_BillFlowNode">
+              <PropertyRef Name="BillFlowNodeID" />
+            </Principal>
+            <Dependent Role="WF_BillFlowNodeRemark">
+              <PropertyRef Name="BillFlowNodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WF_WORKFLOWNODE_REFERENCE_2_WF_WORKFLOW">
+          <End Role="WF_WorkFlow" Type="Self.WF_WorkFlow" Multiplicity="0..1" />
+          <End Role="WF_WorkFlowNode" Type="Self.WF_WorkFlowNode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_WorkFlow">
+              <PropertyRef Name="WorkFlowID" />
+            </Principal>
+            <Dependent Role="WF_WorkFlowNode">
+              <PropertyRef Name="WorkFlowID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WF_WORKFLOWNODE_REFERENCE_3_WF_NODE">
+          <End Role="WF_Node" Type="Self.WF_Node" Multiplicity="0..1" />
+          <End Role="WF_WorkFlowNode" Type="Self.WF_WorkFlowNode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_Node">
+              <PropertyRef Name="NodeID" />
+            </Principal>
+            <Dependent Role="WF_WorkFlowNode">
+              <PropertyRef Name="NodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Proc_WorkFlow_BillRemark_List" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BillID" Type="int" Mode="In" />
+          <Parameter Name="WorkFlowID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Proc_WorkFlow_Interface" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BillFlowNodeID" Type="int" Mode="In" />
+          <Parameter Name="BillID" Type="int" Mode="In" />
+          <Parameter Name="WorkFlowID" Type="int" Mode="In" />
+          <Parameter Name="NodeID" Type="int" Mode="In" />
+          <Parameter Name="OpType" Type="int" Mode="In" />
+          <Parameter Name="TransactorID" Type="int" Mode="In" />
+          <Parameter Name="Transactor" Type="nvarchar" Mode="In" />
+          <Parameter Name="TransactorRemark" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="proc_EditLeave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="billId" Type="int" Mode="In" />
+          <Parameter Name="billFlowNodeId" Type="int" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="beginDate" Type="datetime" Mode="In" />
+          <Parameter Name="endDate" Type="datetime" Mode="In" />
+          <Parameter Name="Transactor" Type="nvarchar" Mode="In" />
+          <Parameter Name="TransactorID" Type="int" Mode="In" />
+          <Parameter Name="TransactorRemark" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="proc_GetLeaveList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NodeID" Type="int" Mode="In" />
+          <Parameter Name="OpType" Type="int" Mode="In" />
+        </Function>
+        <Function Name="proc_InsertLeave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="beginDate" Type="datetime" Mode="In" />
+          <Parameter Name="endDate" Type="datetime" Mode="In" />
+          <Parameter Name="Transactor" Type="nvarchar" Mode="In" />
+          <Parameter Name="TransactorID" Type="int" Mode="In" />
+          <Parameter Name="TransactorRemark" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="proc_LeaveConfirm" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BillID" Type="int" Mode="In" />
+          <Parameter Name="BillFlowNodeID" Type="int" Mode="In" />
+          <Parameter Name="Remark" Type="nvarchar" Mode="In" />
+          <Parameter Name="Transactor" Type="nvarchar" Mode="In" />
+          <Parameter Name="TransactorID" Type="int" Mode="In" />
+          <Parameter Name="OpType" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="OuOAModelStoreContainer">
+          <EntitySet Name="Bill_Leave" EntityType="Self.Bill_Leave" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ou_Department" EntityType="Self.Ou_Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ou_Permission" EntityType="Self.Ou_Permission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ou_Role" EntityType="Self.Ou_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ou_RolePermission" EntityType="Self.Ou_RolePermission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ou_UserInfo" EntityType="Self.Ou_UserInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ou_UserRole" EntityType="Self.Ou_UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ou_UserVipPermission" EntityType="Self.Ou_UserVipPermission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WF_AutoTransactNode" EntityType="Self.WF_AutoTransactNode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WF_BillFlowNode" EntityType="Self.WF_BillFlowNode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WF_BillFlowNodeRemark" EntityType="Self.WF_BillFlowNodeRemark" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WF_BillState" EntityType="Self.WF_BillState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WF_Node" EntityType="Self.WF_Node" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WF_NodeState" EntityType="Self.WF_NodeState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WF_WorkFlow" EntityType="Self.WF_WorkFlow" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WF_WorkFlowNode" EntityType="Self.WF_WorkFlowNode" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BILL_LEAVE_REFERENCE_10_WF_BILLSTATE" Association="Self.FK_BILL_LEAVE_REFERENCE_10_WF_BILLSTATE">
+            <End Role="WF_BillState" EntitySet="WF_BillState" />
+            <End Role="Bill_Leave" EntitySet="Bill_Leave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BILL_LEAVE_REFERENCE_11_WF_WORKFLOW" Association="Self.FK_BILL_LEAVE_REFERENCE_11_WF_WORKFLOW">
+            <End Role="WF_WorkFlow" EntitySet="WF_WorkFlow" />
+            <End Role="Bill_Leave" EntitySet="Bill_Leave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ou_Role_Ou_Department" Association="Self.FK_Ou_Role_Ou_Department">
+            <End Role="Ou_Department" EntitySet="Ou_Department" />
+            <End Role="Ou_Role" EntitySet="Ou_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ou_RolePermission_Ou_Permission" Association="Self.FK_Ou_RolePermission_Ou_Permission">
+            <End Role="Ou_Permission" EntitySet="Ou_Permission" />
+            <End Role="Ou_RolePermission" EntitySet="Ou_RolePermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ou_RolePermission_Ou_Role" Association="Self.FK_Ou_RolePermission_Ou_Role">
+            <End Role="Ou_Role" EntitySet="Ou_Role" />
+            <End Role="Ou_RolePermission" EntitySet="Ou_RolePermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ou_UserInfo_Ou_Department" Association="Self.FK_Ou_UserInfo_Ou_Department">
+            <End Role="Ou_Department" EntitySet="Ou_Department" />
+            <End Role="Ou_UserInfo" EntitySet="Ou_UserInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ou_UserRole_Ou_Role" Association="Self.FK_Ou_UserRole_Ou_Role">
+            <End Role="Ou_Role" EntitySet="Ou_Role" />
+            <End Role="Ou_UserRole" EntitySet="Ou_UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ou_UserRole_Ou_UserInfo" Association="Self.FK_Ou_UserRole_Ou_UserInfo">
+            <End Role="Ou_UserInfo" EntitySet="Ou_UserInfo" />
+            <End Role="Ou_UserRole" EntitySet="Ou_UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ou_UserVipPermission_Ou_Permission" Association="Self.FK_Ou_UserVipPermission_Ou_Permission">
+            <End Role="Ou_Permission" EntitySet="Ou_Permission" />
+            <End Role="Ou_UserVipPermission" EntitySet="Ou_UserVipPermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ou_UserVipPermission_Ou_UserInfo" Association="Self.FK_Ou_UserVipPermission_Ou_UserInfo">
+            <End Role="Ou_UserInfo" EntitySet="Ou_UserInfo" />
+            <End Role="Ou_UserVipPermission" EntitySet="Ou_UserVipPermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WF_AUTOTRANSACTNOD_REFERENCE_4_WF_WORKFLOWNODE" Association="Self.FK_WF_AUTOTRANSACTNOD_REFERENCE_4_WF_WORKFLOWNODE">
+            <End Role="WF_WorkFlowNode" EntitySet="WF_WorkFlowNode" />
+            <End Role="WF_AutoTransactNode" EntitySet="WF_AutoTransactNode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WF_BILLFLOWNODE_REFERENCE_6_WF_WORKFLOWNODE" Association="Self.FK_WF_BILLFLOWNODE_REFERENCE_6_WF_WORKFLOWNODE">
+            <End Role="WF_WorkFlowNode" EntitySet="WF_WorkFlowNode" />
+            <End Role="WF_BillFlowNode" EntitySet="WF_BillFlowNode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WF_BILLFLOWNODE_REFERENCE_7_WF_NODESTATE" Association="Self.FK_WF_BILLFLOWNODE_REFERENCE_7_WF_NODESTATE">
+            <End Role="WF_NodeState" EntitySet="WF_NodeState" />
+            <End Role="WF_BillFlowNode" EntitySet="WF_BillFlowNode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WF_BILLFLOWNODE_REFERENCE_8_WF_WORKFLOW" Association="Self.FK_WF_BILLFLOWNODE_REFERENCE_8_WF_WORKFLOW">
+            <End Role="WF_WorkFlow" EntitySet="WF_WorkFlow" />
+            <End Role="WF_BillFlowNode" EntitySet="WF_BillFlowNode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WF_BILLFLOWNODEREM_REFERENCE_9_WF_BILLFLOWNODE" Association="Self.FK_WF_BILLFLOWNODEREM_REFERENCE_9_WF_BILLFLOWNODE">
+            <End Role="WF_BillFlowNode" EntitySet="WF_BillFlowNode" />
+            <End Role="WF_BillFlowNodeRemark" EntitySet="WF_BillFlowNodeRemark" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WF_WORKFLOWNODE_REFERENCE_2_WF_WORKFLOW" Association="Self.FK_WF_WORKFLOWNODE_REFERENCE_2_WF_WORKFLOW">
+            <End Role="WF_WorkFlow" EntitySet="WF_WorkFlow" />
+            <End Role="WF_WorkFlowNode" EntitySet="WF_WorkFlowNode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WF_WORKFLOWNODE_REFERENCE_3_WF_NODE" Association="Self.FK_WF_WORKFLOWNODE_REFERENCE_3_WF_NODE">
+            <End Role="WF_Node" EntitySet="WF_Node" />
+            <End Role="WF_WorkFlowNode" EntitySet="WF_WorkFlowNode" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OuOAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bill_Leave">
+          <Key>
+            <PropertyRef Name="Leave" />
+          </Key>
+          <Property Name="Leave" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BeginDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="BillStateID" Type="Int32" />
+          <Property Name="WorkFlowID" Type="Int32" />
+          <NavigationProperty Name="WF_BillState" Relationship="Self.FK_BILL_LEAVE_REFERENCE_10_WF_BILLSTATE" FromRole="Bill_Leave" ToRole="WF_BillState" />
+          <NavigationProperty Name="WF_WorkFlow" Relationship="Self.FK_BILL_LEAVE_REFERENCE_11_WF_WORKFLOW" FromRole="Bill_Leave" ToRole="WF_WorkFlow" />
+        </EntityType>
+        <EntityType Name="Ou_Department">
+          <Key>
+            <PropertyRef Name="depId" />
+          </Key>
+          <Property Name="depId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="depPid" Type="Int32" Nullable="false" />
+          <Property Name="depName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="depRemark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="depIsDel" Type="Boolean" Nullable="false" />
+          <Property Name="depAddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Ou_Role" Relationship="Self.FK_Ou_Role_Ou_Department" FromRole="Ou_Department" ToRole="Ou_Role" />
+          <NavigationProperty Name="Ou_UserInfo" Relationship="Self.FK_Ou_UserInfo_Ou_Department" FromRole="Ou_Department" ToRole="Ou_UserInfo" />
+        </EntityType>
+        <EntityType Name="Ou_Permission">
+          <Key>
+            <PropertyRef Name="pid" />
+          </Key>
+          <Property Name="pid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pParent" Type="Int32" Nullable="false" />
+          <Property Name="pName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pAreaName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pControllerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pActionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pFormMethod" Type="Int16" Nullable="false" />
+          <Property Name="pOperationType" Type="Int16" Nullable="false" />
+          <Property Name="pIco" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pOrder" Type="Int32" Nullable="false" />
+          <Property Name="pIsLink" Type="Boolean" Nullable="false" />
+          <Property Name="pLinkUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pIsShow" Type="Boolean" Nullable="false" />
+          <Property Name="pRemark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pIsDel" Type="Boolean" Nullable="false" />
+          <Property Name="pAddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Ou_RolePermission" Relationship="Self.FK_Ou_RolePermission_Ou_Permission" FromRole="Ou_Permission" ToRole="Ou_RolePermission" />
+          <NavigationProperty Name="Ou_UserVipPermission" Relationship="Self.FK_Ou_UserVipPermission_Ou_Permission" FromRole="Ou_Permission" ToRole="Ou_UserVipPermission" />
+        </EntityType>
+        <EntityType Name="Ou_Role">
+          <Key>
+            <PropertyRef Name="rId" />
+          </Key>
+          <Property Name="rId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rDepId" Type="Int32" Nullable="false" />
+          <Property Name="rName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rRemark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rIsShow" Type="Boolean" Nullable="false" />
+          <Property Name="rIsDel" Type="Boolean" Nullable="false" />
+          <Property Name="rAddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Ou_Department" Relationship="Self.FK_Ou_Role_Ou_Department" FromRole="Ou_Role" ToRole="Ou_Department" />
+          <NavigationProperty Name="Ou_RolePermission" Relationship="Self.FK_Ou_RolePermission_Ou_Role" FromRole="Ou_Role" ToRole="Ou_RolePermission" />
+          <NavigationProperty Name="Ou_UserRole" Relationship="Self.FK_Ou_UserRole_Ou_Role" FromRole="Ou_Role" ToRole="Ou_UserRole" />
+        </EntityType>
+        <EntityType Name="Ou_RolePermission">
+          <Key>
+            <PropertyRef Name="rpId" />
+          </Key>
+          <Property Name="rpId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rpRId" Type="Int32" Nullable="false" />
+          <Property Name="rpPId" Type="Int32" Nullable="false" />
+          <Property Name="rpIsDel" Type="Boolean" Nullable="false" />
+          <Property Name="rpAddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Ou_Permission" Relationship="Self.FK_Ou_RolePermission_Ou_Permission" FromRole="Ou_RolePermission" ToRole="Ou_Permission" />
+          <NavigationProperty Name="Ou_Role" Relationship="Self.FK_Ou_RolePermission_Ou_Role" FromRole="Ou_RolePermission" ToRole="Ou_Role" />
+        </EntityType>
+        <EntityType Name="Ou_UserInfo">
+          <Key>
+            <PropertyRef Name="uId" />
+          </Key>
+          <Property Name="uId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uDepId" Type="Int32" Nullable="false" />
+          <Property Name="uLoginName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uPwd" Type="String" MaxLength="32" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="uGender" Type="Boolean" Nullable="false" />
+          <Property Name="uPost" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uRemark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uIsDel" Type="Boolean" Nullable="false" />
+          <Property Name="uAddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Ou_Department" Relationship="Self.FK_Ou_UserInfo_Ou_Department" FromRole="Ou_UserInfo" ToRole="Ou_Department" />
+          <NavigationProperty Name="Ou_UserRole" Relationship="Self.FK_Ou_UserRole_Ou_UserInfo" FromRole="Ou_UserInfo" ToRole="Ou_UserRole" />
+          <NavigationProperty Name="Ou_UserVipPermission" Relationship="Self.FK_Ou_UserVipPermission_Ou_UserInfo" FromRole="Ou_UserInfo" ToRole="Ou_UserVipPermission" />
+        </EntityType>
+        <EntityType Name="Ou_UserRole">
+          <Key>
+            <PropertyRef Name="urId" />
+          </Key>
+          <Property Name="urId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="urUId" Type="Int32" Nullable="false" />
+          <Property Name="urRId" Type="Int32" Nullable="false" />
+          <Property Name="urIsDel" Type="Boolean" Nullable="false" />
+          <Property Name="urAddtime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Ou_Role" Relationship="Self.FK_Ou_UserRole_Ou_Role" FromRole="Ou_UserRole" ToRole="Ou_Role" />
+          <NavigationProperty Name="Ou_UserInfo" Relationship="Self.FK_Ou_UserRole_Ou_UserInfo" FromRole="Ou_UserRole" ToRole="Ou_UserInfo" />
+        </EntityType>
+        <EntityType Name="Ou_UserVipPermission">
+          <Key>
+            <PropertyRef Name="vipId" />
+          </Key>
+          <Property Name="vipId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vipUserId" Type="Int32" Nullable="false" />
+          <Property Name="vipPermission" Type="Int32" Nullable="false" />
+          <Property Name="vipRemark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="vipIsDel" Type="Boolean" Nullable="false" />
+          <Property Name="vipAddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Ou_Permission" Relationship="Self.FK_Ou_UserVipPermission_Ou_Permission" FromRole="Ou_UserVipPermission" ToRole="Ou_Permission" />
+          <NavigationProperty Name="Ou_UserInfo" Relationship="Self.FK_Ou_UserVipPermission_Ou_UserInfo" FromRole="Ou_UserVipPermission" ToRole="Ou_UserInfo" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="WF_AutoTransactNode">
+          <Key>
+            <PropertyRef Name="AutoTransactNodeID" />
+          </Key>
+          <Property Name="AutoTransactNodeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkFlowNodeID" Type="Int32" />
+          <NavigationProperty Name="WF_WorkFlowNode" Relationship="Self.FK_WF_AUTOTRANSACTNOD_REFERENCE_4_WF_WORKFLOWNODE" FromRole="WF_AutoTransactNode" ToRole="WF_WorkFlowNode" />
+        </EntityType>
+        <EntityType Name="WF_BillFlowNode">
+          <Key>
+            <PropertyRef Name="BillFlowNodeID" />
+          </Key>
+          <Property Name="BillFlowNodeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkFlowNodeID" Type="Int32" />
+          <Property Name="NodeStateID" Type="Int32" />
+          <Property Name="WorkFlowID" Type="Int32" />
+          <Property Name="BillID" Type="Int32" />
+          <NavigationProperty Name="WF_WorkFlowNode" Relationship="Self.FK_WF_BILLFLOWNODE_REFERENCE_6_WF_WORKFLOWNODE" FromRole="WF_BillFlowNode" ToRole="WF_WorkFlowNode" />
+          <NavigationProperty Name="WF_NodeState" Relationship="Self.FK_WF_BILLFLOWNODE_REFERENCE_7_WF_NODESTATE" FromRole="WF_BillFlowNode" ToRole="WF_NodeState" />
+          <NavigationProperty Name="WF_WorkFlow" Relationship="Self.FK_WF_BILLFLOWNODE_REFERENCE_8_WF_WORKFLOW" FromRole="WF_BillFlowNode" ToRole="WF_WorkFlow" />
+          <NavigationProperty Name="WF_BillFlowNodeRemark" Relationship="Self.FK_WF_BILLFLOWNODEREM_REFERENCE_9_WF_BILLFLOWNODE" FromRole="WF_BillFlowNode" ToRole="WF_BillFlowNodeRemark" />
+        </EntityType>
+        <EntityType Name="WF_BillFlowNodeRemark">
+          <Key>
+            <PropertyRef Name="BillFlowNodeRemarkID" />
+          </Key>
+          <Property Name="BillFlowNodeRemarkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BillFlowNodeID" Type="Int32" />
+          <Property Name="TransactorID" Type="Int32" />
+          <Property Name="Transactor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransactorDate" Type="DateTime" Precision="3" />
+          <Property Name="TransactorOperation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransactorRemark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="WF_BillFlowNode" Relationship="Self.FK_WF_BILLFLOWNODEREM_REFERENCE_9_WF_BILLFLOWNODE" FromRole="WF_BillFlowNodeRemark" ToRole="WF_BillFlowNode" />
+        </EntityType>
+        <EntityType Name="WF_BillState">
+          <Key>
+            <PropertyRef Name="BillStateID" />
+          </Key>
+          <Property Name="BillStateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BillStateName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bill_Leave" Relationship="Self.FK_BILL_LEAVE_REFERENCE_10_WF_BILLSTATE" FromRole="WF_BillState" ToRole="Bill_Leave" />
+        </EntityType>
+        <EntityType Name="WF_Node">
+          <Key>
+            <PropertyRef Name="NodeID" />
+          </Key>
+          <Property Name="NodeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NodeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="WF_WorkFlowNode" Relationship="Self.FK_WF_WORKFLOWNODE_REFERENCE_3_WF_NODE" FromRole="WF_Node" ToRole="WF_WorkFlowNode" />
+        </EntityType>
+        <EntityType Name="WF_NodeState">
+          <Key>
+            <PropertyRef Name="NodeStateID" />
+          </Key>
+          <Property Name="NodeStateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NodeStateName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="WF_BillFlowNode" Relationship="Self.FK_WF_BILLFLOWNODE_REFERENCE_7_WF_NODESTATE" FromRole="WF_NodeState" ToRole="WF_BillFlowNode" />
+        </EntityType>
+        <EntityType Name="WF_WorkFlow">
+          <Key>
+            <PropertyRef Name="WorkFlowID" />
+          </Key>
+          <Property Name="WorkFlowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkFlowName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bill_Leave" Relationship="Self.FK_BILL_LEAVE_REFERENCE_11_WF_WORKFLOW" FromRole="WF_WorkFlow" ToRole="Bill_Leave" />
+          <NavigationProperty Name="WF_BillFlowNode" Relationship="Self.FK_WF_BILLFLOWNODE_REFERENCE_8_WF_WORKFLOW" FromRole="WF_WorkFlow" ToRole="WF_BillFlowNode" />
+          <NavigationProperty Name="WF_WorkFlowNode" Relationship="Self.FK_WF_WORKFLOWNODE_REFERENCE_2_WF_WORKFLOW" FromRole="WF_WorkFlow" ToRole="WF_WorkFlowNode" />
+        </EntityType>
+        <EntityType Name="WF_WorkFlowNode">
+          <Key>
+            <PropertyRef Name="WorkFlowNodeID" />
+          </Key>
+          <Property Name="WorkFlowNodeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkFlowID" Type="Int32" />
+          <Property Name="NodeID" Type="Int32" />
+          <Property Name="WorkFlowNodeSequence" Type="Int32" />
+          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="WF_AutoTransactNode" Relationship="Self.FK_WF_AUTOTRANSACTNOD_REFERENCE_4_WF_WORKFLOWNODE" FromRole="WF_WorkFlowNode" ToRole="WF_AutoTransactNode" />
+          <NavigationProperty Name="WF_BillFlowNode" Relationship="Self.FK_WF_BILLFLOWNODE_REFERENCE_6_WF_WORKFLOWNODE" FromRole="WF_WorkFlowNode" ToRole="WF_BillFlowNode" />
+          <NavigationProperty Name="WF_Node" Relationship="Self.FK_WF_WORKFLOWNODE_REFERENCE_3_WF_NODE" FromRole="WF_WorkFlowNode" ToRole="WF_Node" />
+          <NavigationProperty Name="WF_WorkFlow" Relationship="Self.FK_WF_WORKFLOWNODE_REFERENCE_2_WF_WORKFLOW" FromRole="WF_WorkFlowNode" ToRole="WF_WorkFlow" />
+        </EntityType>
+        <Association Name="FK_BILL_LEAVE_REFERENCE_10_WF_BILLSTATE">
+          <End Role="WF_BillState" Type="Self.WF_BillState" Multiplicity="0..1" />
+          <End Role="Bill_Leave" Type="Self.Bill_Leave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_BillState">
+              <PropertyRef Name="BillStateID" />
+            </Principal>
+            <Dependent Role="Bill_Leave">
+              <PropertyRef Name="BillStateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BILL_LEAVE_REFERENCE_11_WF_WORKFLOW">
+          <End Role="WF_WorkFlow" Type="Self.WF_WorkFlow" Multiplicity="0..1" />
+          <End Role="Bill_Leave" Type="Self.Bill_Leave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_WorkFlow">
+              <PropertyRef Name="WorkFlowID" />
+            </Principal>
+            <Dependent Role="Bill_Leave">
+              <PropertyRef Name="WorkFlowID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ou_Role_Ou_Department">
+          <End Role="Ou_Department" Type="Self.Ou_Department" Multiplicity="1" />
+          <End Role="Ou_Role" Type="Self.Ou_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ou_Department">
+              <PropertyRef Name="depId" />
+            </Principal>
+            <Dependent Role="Ou_Role">
+              <PropertyRef Name="rDepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ou_UserInfo_Ou_Department">
+          <End Role="Ou_Department" Type="Self.Ou_Department" Multiplicity="1" />
+          <End Role="Ou_UserInfo" Type="Self.Ou_UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ou_Department">
+              <PropertyRef Name="depId" />
+            </Principal>
+            <Dependent Role="Ou_UserInfo">
+              <PropertyRef Name="uDepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ou_RolePermission_Ou_Permission">
+          <End Role="Ou_Permission" Type="Self.Ou_Permission" Multiplicity="1" />
+          <End Role="Ou_RolePermission" Type="Self.Ou_RolePermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ou_Permission">
+              <PropertyRef Name="pid" />
+            </Principal>
+            <Dependent Role="Ou_RolePermission">
+              <PropertyRef Name="rpPId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ou_UserVipPermission_Ou_Permission">
+          <End Role="Ou_Permission" Type="Self.Ou_Permission" Multiplicity="1" />
+          <End Role="Ou_UserVipPermission" Type="Self.Ou_UserVipPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ou_Permission">
+              <PropertyRef Name="pid" />
+            </Principal>
+            <Dependent Role="Ou_UserVipPermission">
+              <PropertyRef Name="vipPermission" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ou_RolePermission_Ou_Role">
+          <End Role="Ou_Role" Type="Self.Ou_Role" Multiplicity="1" />
+          <End Role="Ou_RolePermission" Type="Self.Ou_RolePermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ou_Role">
+              <PropertyRef Name="rId" />
+            </Principal>
+            <Dependent Role="Ou_RolePermission">
+              <PropertyRef Name="rpRId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ou_UserRole_Ou_Role">
+          <End Role="Ou_Role" Type="Self.Ou_Role" Multiplicity="1" />
+          <End Role="Ou_UserRole" Type="Self.Ou_UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ou_Role">
+              <PropertyRef Name="rId" />
+            </Principal>
+            <Dependent Role="Ou_UserRole">
+              <PropertyRef Name="urRId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ou_UserRole_Ou_UserInfo">
+          <End Role="Ou_UserInfo" Type="Self.Ou_UserInfo" Multiplicity="1" />
+          <End Role="Ou_UserRole" Type="Self.Ou_UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ou_UserInfo">
+              <PropertyRef Name="uId" />
+            </Principal>
+            <Dependent Role="Ou_UserRole">
+              <PropertyRef Name="urUId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ou_UserVipPermission_Ou_UserInfo">
+          <End Role="Ou_UserInfo" Type="Self.Ou_UserInfo" Multiplicity="1" />
+          <End Role="Ou_UserVipPermission" Type="Self.Ou_UserVipPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ou_UserInfo">
+              <PropertyRef Name="uId" />
+            </Principal>
+            <Dependent Role="Ou_UserVipPermission">
+              <PropertyRef Name="vipUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WF_AUTOTRANSACTNOD_REFERENCE_4_WF_WORKFLOWNODE">
+          <End Role="WF_WorkFlowNode" Type="Self.WF_WorkFlowNode" Multiplicity="0..1" />
+          <End Role="WF_AutoTransactNode" Type="Self.WF_AutoTransactNode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_WorkFlowNode">
+              <PropertyRef Name="WorkFlowNodeID" />
+            </Principal>
+            <Dependent Role="WF_AutoTransactNode">
+              <PropertyRef Name="WorkFlowNodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WF_BILLFLOWNODE_REFERENCE_6_WF_WORKFLOWNODE">
+          <End Role="WF_WorkFlowNode" Type="Self.WF_WorkFlowNode" Multiplicity="0..1" />
+          <End Role="WF_BillFlowNode" Type="Self.WF_BillFlowNode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_WorkFlowNode">
+              <PropertyRef Name="WorkFlowNodeID" />
+            </Principal>
+            <Dependent Role="WF_BillFlowNode">
+              <PropertyRef Name="WorkFlowNodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WF_BILLFLOWNODE_REFERENCE_7_WF_NODESTATE">
+          <End Role="WF_NodeState" Type="Self.WF_NodeState" Multiplicity="0..1" />
+          <End Role="WF_BillFlowNode" Type="Self.WF_BillFlowNode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_NodeState">
+              <PropertyRef Name="NodeStateID" />
+            </Principal>
+            <Dependent Role="WF_BillFlowNode">
+              <PropertyRef Name="NodeStateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WF_BILLFLOWNODE_REFERENCE_8_WF_WORKFLOW">
+          <End Role="WF_WorkFlow" Type="Self.WF_WorkFlow" Multiplicity="0..1" />
+          <End Role="WF_BillFlowNode" Type="Self.WF_BillFlowNode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_WorkFlow">
+              <PropertyRef Name="WorkFlowID" />
+            </Principal>
+            <Dependent Role="WF_BillFlowNode">
+              <PropertyRef Name="WorkFlowID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WF_BILLFLOWNODEREM_REFERENCE_9_WF_BILLFLOWNODE">
+          <End Role="WF_BillFlowNode" Type="Self.WF_BillFlowNode" Multiplicity="0..1" />
+          <End Role="WF_BillFlowNodeRemark" Type="Self.WF_BillFlowNodeRemark" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_BillFlowNode">
+              <PropertyRef Name="BillFlowNodeID" />
+            </Principal>
+            <Dependent Role="WF_BillFlowNodeRemark">
+              <PropertyRef Name="BillFlowNodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WF_WORKFLOWNODE_REFERENCE_3_WF_NODE">
+          <End Role="WF_Node" Type="Self.WF_Node" Multiplicity="0..1" />
+          <End Role="WF_WorkFlowNode" Type="Self.WF_WorkFlowNode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_Node">
+              <PropertyRef Name="NodeID" />
+            </Principal>
+            <Dependent Role="WF_WorkFlowNode">
+              <PropertyRef Name="NodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WF_WORKFLOWNODE_REFERENCE_2_WF_WORKFLOW">
+          <End Role="WF_WorkFlow" Type="Self.WF_WorkFlow" Multiplicity="0..1" />
+          <End Role="WF_WorkFlowNode" Type="Self.WF_WorkFlowNode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WF_WorkFlow">
+              <PropertyRef Name="WorkFlowID" />
+            </Principal>
+            <Dependent Role="WF_WorkFlowNode">
+              <PropertyRef Name="WorkFlowID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OuOAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bill_Leave" EntityType="Self.Bill_Leave" />
+          <EntitySet Name="Ou_Department" EntityType="Self.Ou_Department" />
+          <EntitySet Name="Ou_Permission" EntityType="Self.Ou_Permission" />
+          <EntitySet Name="Ou_Role" EntityType="Self.Ou_Role" />
+          <EntitySet Name="Ou_RolePermission" EntityType="Self.Ou_RolePermission" />
+          <EntitySet Name="Ou_UserInfo" EntityType="Self.Ou_UserInfo" />
+          <EntitySet Name="Ou_UserRole" EntityType="Self.Ou_UserRole" />
+          <EntitySet Name="Ou_UserVipPermission" EntityType="Self.Ou_UserVipPermission" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="WF_AutoTransactNode" EntityType="Self.WF_AutoTransactNode" />
+          <EntitySet Name="WF_BillFlowNode" EntityType="Self.WF_BillFlowNode" />
+          <EntitySet Name="WF_BillFlowNodeRemark" EntityType="Self.WF_BillFlowNodeRemark" />
+          <EntitySet Name="WF_BillState" EntityType="Self.WF_BillState" />
+          <EntitySet Name="WF_Node" EntityType="Self.WF_Node" />
+          <EntitySet Name="WF_NodeState" EntityType="Self.WF_NodeState" />
+          <EntitySet Name="WF_WorkFlow" EntityType="Self.WF_WorkFlow" />
+          <EntitySet Name="WF_WorkFlowNode" EntityType="Self.WF_WorkFlowNode" />
+          <AssociationSet Name="FK_BILL_LEAVE_REFERENCE_10_WF_BILLSTATE" Association="Self.FK_BILL_LEAVE_REFERENCE_10_WF_BILLSTATE">
+            <End Role="WF_BillState" EntitySet="WF_BillState" />
+            <End Role="Bill_Leave" EntitySet="Bill_Leave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BILL_LEAVE_REFERENCE_11_WF_WORKFLOW" Association="Self.FK_BILL_LEAVE_REFERENCE_11_WF_WORKFLOW">
+            <End Role="WF_WorkFlow" EntitySet="WF_WorkFlow" />
+            <End Role="Bill_Leave" EntitySet="Bill_Leave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ou_Role_Ou_Department" Association="Self.FK_Ou_Role_Ou_Department">
+            <End Role="Ou_Department" EntitySet="Ou_Department" />
+            <End Role="Ou_Role" EntitySet="Ou_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ou_UserInfo_Ou_Department" Association="Self.FK_Ou_UserInfo_Ou_Department">
+            <End Role="Ou_Department" EntitySet="Ou_Department" />
+            <End Role="Ou_UserInfo" EntitySet="Ou_UserInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ou_RolePermission_Ou_Permission" Association="Self.FK_Ou_RolePermission_Ou_Permission">
+            <End Role="Ou_Permission" EntitySet="Ou_Permission" />
+            <End Role="Ou_RolePermission" EntitySet="Ou_RolePermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ou_UserVipPermission_Ou_Permission" Association="Self.FK_Ou_UserVipPermission_Ou_Permission">
+            <End Role="Ou_Permission" EntitySet="Ou_Permission" />
+            <End Role="Ou_UserVipPermission" EntitySet="Ou_UserVipPermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ou_RolePermission_Ou_Role" Association="Self.FK_Ou_RolePermission_Ou_Role">
+            <End Role="Ou_Role" EntitySet="Ou_Role" />
+            <End Role="Ou_RolePermission" EntitySet="Ou_RolePermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ou_UserRole_Ou_Role" Association="Self.FK_Ou_UserRole_Ou_Role">
+            <End Role="Ou_Role" EntitySet="Ou_Role" />
+            <End Role="Ou_UserRole" EntitySet="Ou_UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ou_UserRole_Ou_UserInfo" Association="Self.FK_Ou_UserRole_Ou_UserInfo">
+            <End Role="Ou_UserInfo" EntitySet="Ou_UserInfo" />
+            <End Role="Ou_UserRole" EntitySet="Ou_UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ou_UserVipPermission_Ou_UserInfo" Association="Self.FK_Ou_UserVipPermission_Ou_UserInfo">
+            <End Role="Ou_UserInfo" EntitySet="Ou_UserInfo" />
+            <End Role="Ou_UserVipPermission" EntitySet="Ou_UserVipPermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WF_AUTOTRANSACTNOD_REFERENCE_4_WF_WORKFLOWNODE" Association="Self.FK_WF_AUTOTRANSACTNOD_REFERENCE_4_WF_WORKFLOWNODE">
+            <End Role="WF_WorkFlowNode" EntitySet="WF_WorkFlowNode" />
+            <End Role="WF_AutoTransactNode" EntitySet="WF_AutoTransactNode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WF_BILLFLOWNODE_REFERENCE_6_WF_WORKFLOWNODE" Association="Self.FK_WF_BILLFLOWNODE_REFERENCE_6_WF_WORKFLOWNODE">
+            <End Role="WF_WorkFlowNode" EntitySet="WF_WorkFlowNode" />
+            <End Role="WF_BillFlowNode" EntitySet="WF_BillFlowNode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WF_BILLFLOWNODE_REFERENCE_7_WF_NODESTATE" Association="Self.FK_WF_BILLFLOWNODE_REFERENCE_7_WF_NODESTATE">
+            <End Role="WF_NodeState" EntitySet="WF_NodeState" />
+            <End Role="WF_BillFlowNode" EntitySet="WF_BillFlowNode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WF_BILLFLOWNODE_REFERENCE_8_WF_WORKFLOW" Association="Self.FK_WF_BILLFLOWNODE_REFERENCE_8_WF_WORKFLOW">
+            <End Role="WF_WorkFlow" EntitySet="WF_WorkFlow" />
+            <End Role="WF_BillFlowNode" EntitySet="WF_BillFlowNode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WF_BILLFLOWNODEREM_REFERENCE_9_WF_BILLFLOWNODE" Association="Self.FK_WF_BILLFLOWNODEREM_REFERENCE_9_WF_BILLFLOWNODE">
+            <End Role="WF_BillFlowNode" EntitySet="WF_BillFlowNode" />
+            <End Role="WF_BillFlowNodeRemark" EntitySet="WF_BillFlowNodeRemark" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WF_WORKFLOWNODE_REFERENCE_3_WF_NODE" Association="Self.FK_WF_WORKFLOWNODE_REFERENCE_3_WF_NODE">
+            <End Role="WF_Node" EntitySet="WF_Node" />
+            <End Role="WF_WorkFlowNode" EntitySet="WF_WorkFlowNode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WF_WORKFLOWNODE_REFERENCE_2_WF_WORKFLOW" Association="Self.FK_WF_WORKFLOWNODE_REFERENCE_2_WF_WORKFLOW">
+            <End Role="WF_WorkFlow" EntitySet="WF_WorkFlow" />
+            <End Role="WF_WorkFlowNode" EntitySet="WF_WorkFlowNode" />
+          </AssociationSet>
+          <FunctionImport Name="Proc_WorkFlow_BillRemark_List" ReturnType="Collection(OuOAModel.Proc_WorkFlow_BillRemark_List_Result)">
+            <Parameter Name="BillID" Mode="In" Type="Int32" />
+            <Parameter Name="WorkFlowID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_WorkFlow_Interface">
+            <Parameter Name="BillFlowNodeID" Mode="In" Type="Int32" />
+            <Parameter Name="BillID" Mode="In" Type="Int32" />
+            <Parameter Name="WorkFlowID" Mode="In" Type="Int32" />
+            <Parameter Name="NodeID" Mode="In" Type="Int32" />
+            <Parameter Name="OpType" Mode="In" Type="Int32" />
+            <Parameter Name="TransactorID" Mode="In" Type="Int32" />
+            <Parameter Name="Transactor" Mode="In" Type="String" />
+            <Parameter Name="TransactorRemark" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="proc_EditLeave">
+            <Parameter Name="billId" Mode="In" Type="Int32" />
+            <Parameter Name="billFlowNodeId" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="beginDate" Mode="In" Type="DateTime" />
+            <Parameter Name="endDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Transactor" Mode="In" Type="String" />
+            <Parameter Name="TransactorID" Mode="In" Type="Int32" />
+            <Parameter Name="TransactorRemark" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="proc_GetLeaveList" ReturnType="Collection(OuOAModel.proc_GetLeaveList_Result)">
+            <Parameter Name="NodeID" Mode="In" Type="Int32" />
+            <Parameter Name="OpType" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="proc_InsertLeave">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="beginDate" Mode="In" Type="DateTime" />
+            <Parameter Name="endDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Transactor" Mode="In" Type="String" />
+            <Parameter Name="TransactorID" Mode="In" Type="Int32" />
+            <Parameter Name="TransactorRemark" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="proc_LeaveConfirm">
+            <Parameter Name="BillID" Mode="In" Type="Int32" />
+            <Parameter Name="BillFlowNodeID" Mode="In" Type="Int32" />
+            <Parameter Name="Remark" Mode="In" Type="String" />
+            <Parameter Name="Transactor" Mode="In" Type="String" />
+            <Parameter Name="TransactorID" Mode="In" Type="Int32" />
+            <Parameter Name="OpType" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(OuOAModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(OuOAModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="Proc_WorkFlow_BillRemark_List_Result">
+          <Property Type="String" Name="NodeName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Transactor" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="TransactorDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="TransactorOperation" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TransactorRemark" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="proc_GetLeaveList_Result">
+          <Property Type="Int32" Name="Leave" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="BeginDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="BillStateName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="BillFlowNodeID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OuOAModelStoreContainer" CdmEntityContainer="OuOAEntities">
+          <EntitySetMapping Name="Bill_Leave">
+            <EntityTypeMapping TypeName="OuOAModel.Bill_Leave">
+              <MappingFragment StoreEntitySet="Bill_Leave">
+                <ScalarProperty Name="Leave" ColumnName="Leave" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="BillStateID" ColumnName="BillStateID" />
+                <ScalarProperty Name="WorkFlowID" ColumnName="WorkFlowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ou_Department">
+            <EntityTypeMapping TypeName="OuOAModel.Ou_Department">
+              <MappingFragment StoreEntitySet="Ou_Department">
+                <ScalarProperty Name="depId" ColumnName="depId" />
+                <ScalarProperty Name="depPid" ColumnName="depPid" />
+                <ScalarProperty Name="depName" ColumnName="depName" />
+                <ScalarProperty Name="depRemark" ColumnName="depRemark" />
+                <ScalarProperty Name="depIsDel" ColumnName="depIsDel" />
+                <ScalarProperty Name="depAddTime" ColumnName="depAddTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ou_Permission">
+            <EntityTypeMapping TypeName="OuOAModel.Ou_Permission">
+              <MappingFragment StoreEntitySet="Ou_Permission">
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="pParent" ColumnName="pParent" />
+                <ScalarProperty Name="pName" ColumnName="pName" />
+                <ScalarProperty Name="pAreaName" ColumnName="pAreaName" />
+                <ScalarProperty Name="pControllerName" ColumnName="pControllerName" />
+                <ScalarProperty Name="pActionName" ColumnName="pActionName" />
+                <ScalarProperty Name="pFormMethod" ColumnName="pFormMethod" />
+                <ScalarProperty Name="pOperationType" ColumnName="pOperationType" />
+                <ScalarProperty Name="pIco" ColumnName="pIco" />
+                <ScalarProperty Name="pOrder" ColumnName="pOrder" />
+                <ScalarProperty Name="pIsLink" ColumnName="pIsLink" />
+                <ScalarProperty Name="pLinkUrl" ColumnName="pLinkUrl" />
+                <ScalarProperty Name="pIsShow" ColumnName="pIsShow" />
+                <ScalarProperty Name="pRemark" ColumnName="pRemark" />
+                <ScalarProperty Name="pIsDel" ColumnName="pIsDel" />
+                <ScalarProperty Name="pAddTime" ColumnName="pAddTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ou_Role">
+            <EntityTypeMapping TypeName="OuOAModel.Ou_Role">
+              <MappingFragment StoreEntitySet="Ou_Role">
+                <ScalarProperty Name="rId" ColumnName="rId" />
+                <ScalarProperty Name="rDepId" ColumnName="rDepId" />
+                <ScalarProperty Name="rName" ColumnName="rName" />
+                <ScalarProperty Name="rRemark" ColumnName="rRemark" />
+                <ScalarProperty Name="rIsShow" ColumnName="rIsShow" />
+                <ScalarProperty Name="rIsDel" ColumnName="rIsDel" />
+                <ScalarProperty Name="rAddTime" ColumnName="rAddTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ou_RolePermission">
+            <EntityTypeMapping TypeName="OuOAModel.Ou_RolePermission">
+              <MappingFragment StoreEntitySet="Ou_RolePermission">
+                <ScalarProperty Name="rpId" ColumnName="rpId" />
+                <ScalarProperty Name="rpRId" ColumnName="rpRId" />
+                <ScalarProperty Name="rpPId" ColumnName="rpPId" />
+                <ScalarProperty Name="rpIsDel" ColumnName="rpIsDel" />
+                <ScalarProperty Name="rpAddTime" ColumnName="rpAddTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ou_UserInfo">
+            <EntityTypeMapping TypeName="OuOAModel.Ou_UserInfo">
+              <MappingFragment StoreEntitySet="Ou_UserInfo">
+                <ScalarProperty Name="uId" ColumnName="uId" />
+                <ScalarProperty Name="uDepId" ColumnName="uDepId" />
+                <ScalarProperty Name="uLoginName" ColumnName="uLoginName" />
+                <ScalarProperty Name="uPwd" ColumnName="uPwd" />
+                <ScalarProperty Name="uGender" ColumnName="uGender" />
+                <ScalarProperty Name="uPost" ColumnName="uPost" />
+                <ScalarProperty Name="uRemark" ColumnName="uRemark" />
+                <ScalarProperty Name="uIsDel" ColumnName="uIsDel" />
+                <ScalarProperty Name="uAddTime" ColumnName="uAddTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ou_UserRole">
+            <EntityTypeMapping TypeName="OuOAModel.Ou_UserRole">
+              <MappingFragment StoreEntitySet="Ou_UserRole">
+                <ScalarProperty Name="urId" ColumnName="urId" />
+                <ScalarProperty Name="urUId" ColumnName="urUId" />
+                <ScalarProperty Name="urRId" ColumnName="urRId" />
+                <ScalarProperty Name="urIsDel" ColumnName="urIsDel" />
+                <ScalarProperty Name="urAddtime" ColumnName="urAddtime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ou_UserVipPermission">
+            <EntityTypeMapping TypeName="OuOAModel.Ou_UserVipPermission">
+              <MappingFragment StoreEntitySet="Ou_UserVipPermission">
+                <ScalarProperty Name="vipId" ColumnName="vipId" />
+                <ScalarProperty Name="vipUserId" ColumnName="vipUserId" />
+                <ScalarProperty Name="vipPermission" ColumnName="vipPermission" />
+                <ScalarProperty Name="vipRemark" ColumnName="vipRemark" />
+                <ScalarProperty Name="vipIsDel" ColumnName="vipIsDel" />
+                <ScalarProperty Name="vipAddTime" ColumnName="vipAddTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="OuOAModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WF_AutoTransactNode">
+            <EntityTypeMapping TypeName="OuOAModel.WF_AutoTransactNode">
+              <MappingFragment StoreEntitySet="WF_AutoTransactNode">
+                <ScalarProperty Name="AutoTransactNodeID" ColumnName="AutoTransactNodeID" />
+                <ScalarProperty Name="WorkFlowNodeID" ColumnName="WorkFlowNodeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WF_BillFlowNode">
+            <EntityTypeMapping TypeName="OuOAModel.WF_BillFlowNode">
+              <MappingFragment StoreEntitySet="WF_BillFlowNode">
+                <ScalarProperty Name="BillFlowNodeID" ColumnName="BillFlowNodeID" />
+                <ScalarProperty Name="WorkFlowNodeID" ColumnName="WorkFlowNodeID" />
+                <ScalarProperty Name="NodeStateID" ColumnName="NodeStateID" />
+                <ScalarProperty Name="WorkFlowID" ColumnName="WorkFlowID" />
+                <ScalarProperty Name="BillID" ColumnName="BillID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WF_BillFlowNodeRemark">
+            <EntityTypeMapping TypeName="OuOAModel.WF_BillFlowNodeRemark">
+              <MappingFragment StoreEntitySet="WF_BillFlowNodeRemark">
+                <ScalarProperty Name="BillFlowNodeRemarkID" ColumnName="BillFlowNodeRemarkID" />
+                <ScalarProperty Name="BillFlowNodeID" ColumnName="BillFlowNodeID" />
+                <ScalarProperty Name="TransactorID" ColumnName="TransactorID" />
+                <ScalarProperty Name="Transactor" ColumnName="Transactor" />
+                <ScalarProperty Name="TransactorDate" ColumnName="TransactorDate" />
+                <ScalarProperty Name="TransactorOperation" ColumnName="TransactorOperation" />
+                <ScalarProperty Name="TransactorRemark" ColumnName="TransactorRemark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WF_BillState">
+            <EntityTypeMapping TypeName="OuOAModel.WF_BillState">
+              <MappingFragment StoreEntitySet="WF_BillState">
+                <ScalarProperty Name="BillStateID" ColumnName="BillStateID" />
+                <ScalarProperty Name="BillStateName" ColumnName="BillStateName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WF_Node">
+            <EntityTypeMapping TypeName="OuOAModel.WF_Node">
+              <MappingFragment StoreEntitySet="WF_Node">
+                <ScalarProperty Name="NodeID" ColumnName="NodeID" />
+                <ScalarProperty Name="NodeName" ColumnName="NodeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WF_NodeState">
+            <EntityTypeMapping TypeName="OuOAModel.WF_NodeState">
+              <MappingFragment StoreEntitySet="WF_NodeState">
+                <ScalarProperty Name="NodeStateID" ColumnName="NodeStateID" />
+                <ScalarProperty Name="NodeStateName" ColumnName="NodeStateName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WF_WorkFlow">
+            <EntityTypeMapping TypeName="OuOAModel.WF_WorkFlow">
+              <MappingFragment StoreEntitySet="WF_WorkFlow">
+                <ScalarProperty Name="WorkFlowID" ColumnName="WorkFlowID" />
+                <ScalarProperty Name="WorkFlowName" ColumnName="WorkFlowName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WF_WorkFlowNode">
+            <EntityTypeMapping TypeName="OuOAModel.WF_WorkFlowNode">
+              <MappingFragment StoreEntitySet="WF_WorkFlowNode">
+                <ScalarProperty Name="WorkFlowNodeID" ColumnName="WorkFlowNodeID" />
+                <ScalarProperty Name="WorkFlowID" ColumnName="WorkFlowID" />
+                <ScalarProperty Name="NodeID" ColumnName="NodeID" />
+                <ScalarProperty Name="WorkFlowNodeSequence" ColumnName="WorkFlowNodeSequence" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Proc_WorkFlow_BillRemark_List" FunctionName="OuOAModel.Store.Proc_WorkFlow_BillRemark_List">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OuOAModel.Proc_WorkFlow_BillRemark_List_Result">
+                <ScalarProperty Name="NodeName" ColumnName="NodeName" />
+                <ScalarProperty Name="Transactor" ColumnName="Transactor" />
+                <ScalarProperty Name="TransactorDate" ColumnName="TransactorDate" />
+                <ScalarProperty Name="TransactorOperation" ColumnName="TransactorOperation" />
+                <ScalarProperty Name="TransactorRemark" ColumnName="TransactorRemark" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Proc_WorkFlow_Interface" FunctionName="OuOAModel.Store.Proc_WorkFlow_Interface" />
+          <FunctionImportMapping FunctionImportName="proc_EditLeave" FunctionName="OuOAModel.Store.proc_EditLeave" />
+          <FunctionImportMapping FunctionImportName="proc_GetLeaveList" FunctionName="OuOAModel.Store.proc_GetLeaveList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OuOAModel.proc_GetLeaveList_Result">
+                <ScalarProperty Name="Leave" ColumnName="Leave" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="BillStateName" ColumnName="BillStateName" />
+                <ScalarProperty Name="BillFlowNodeID" ColumnName="BillFlowNodeID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_InsertLeave" FunctionName="OuOAModel.Store.proc_InsertLeave" />
+          <FunctionImportMapping FunctionImportName="proc_LeaveConfirm" FunctionName="OuOAModel.Store.proc_LeaveConfirm" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="OuOAModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="OuOAModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="OuOAModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="OuOAModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OuOAModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="OuOAModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OuOAModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="OuOAModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="OuOAModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
