@@ -8,19 +8,21 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Admin</title>
-    @Scripts.Render("~/mvcAjax")    @*请求BundleConfig.cs中mvcAjax合并的脚本*@
     <style type="text/css">
-    #loadMsg {
-        /*会导致重排*/
-        display: none;
-        /*visibility: hidden;*/  /*会导致重绘*/
-    }
+        #loadMsg {
+            /*会导致重排*/
+            display: none;
+            /*visibility: hidden;*/ /*会导致重绘*/
+        }
     </style>
+
+    @Scripts.Render("~/mvcAjax")    @*请求BundleConfig.cs中mvcAjax合并的脚本*@
+    <script type="text/javascript" src="~/Scripts/jquery.msgProcess.js"></script>
     <script type="text/javascript">
         //成功时调用，接收控制的返回值
         function Success(josnData)
         {
-            alert(josnData);
+            $.procAjaxData(josnData, function () { window.location = josnData.BackUrl; });
         }
     </script>
 </head>
@@ -34,7 +36,7 @@
 }))
 {
     <input type="text" name="txtName" value="admin" />
-    <input type="password" name="txtPwd" value="123123" />
+    <input type="password" name="txtPwd" value="123" />
     <input type="submit" />
 }
     <div id="loadMsg">

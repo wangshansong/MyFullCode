@@ -49,6 +49,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IBLL.tt</DependentUpon>
     </Compile>
+    <Compile Include="IBLLExtention\IOu_UserInfoBLL.cs" />
     <Compile Include="IBLLSession.cs" />
     <Compile Include="IBLLSessionExtension.cs">
       <DependentUpon>IBLLSessionExtension.tt</DependentUpon>

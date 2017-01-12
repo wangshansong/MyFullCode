@@ -1,4 +1,5 @@
-﻿using MVCOA.Helper;
+﻿using MODEL.FormatModel;
+using MVCOA.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,10 +32,35 @@ namespace MVCOA.Logic.Admin
         [HttpPost]
         public ActionResult Login(FormCollection collection)
         {
-            string name = collection["txtName"].ToString();
-            string pwd = collection["txtPwd"].ToString();
-           var ss =  OperateContext.BLLSession;
-            return Content(name+pwd);
+            AjaxMsgModel ajaxMsg = new AjaxMsgModel();
+            //1.获取用户名密码
+            string strName = collection["txtName"].ToString();
+            string strPwd = collection["txtPwd"].ToString();
+            MODEL.Ou_UserInfo user = OperateContext.BLLSession.IOu_UserInfoBLL.Login(strName, strPwd);
+            if (user != null)
+            {
+                ajaxMsg.Msg = "登录成功！";
+                ajaxMsg.Statu = "ok";
+                ajaxMsg.BackUrl = "/admin/admin/Index";
+
+            }
+            else
+            {
+                ajaxMsg.Msg = "登录失败！";
+                ajaxMsg.Statu = "err";
+
+            }
+
+            return Json(ajaxMsg);
         }
+
+        /// <summary>
+        /// 显示主页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Index()
+        {
+            return View();
+        } 
     }
 }
