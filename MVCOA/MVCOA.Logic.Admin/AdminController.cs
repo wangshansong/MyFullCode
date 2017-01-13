@@ -1,10 +1,12 @@
-﻿using MODEL.FormatModel;
+﻿using Common;
+using MODEL.FormatModel;
 using MVCOA.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 
 namespace MVCOA.Logic.Admin
@@ -39,10 +41,19 @@ namespace MVCOA.Logic.Admin
             MODEL.Ou_UserInfo user = OperateContext.BLLSession.IOu_UserInfoBLL.Login(strName, strPwd);
             if (user != null)
             {
+                //1.1登录成功之后将数据写入到Session中
+                Session["ainfo"] = user;
+                //1.2登录成功之后将数据写入到Cookie中
+                string strEncryptUserInfo = SecurityHelper.EncryptUserInfo(user.uLoginName);
+                HttpCookie userInfoCookie = new HttpCookie("aInfo",strEncryptUserInfo);
+                userInfoCookie.Expires = DateTime.Now.AddDays(1);//设置失效时间
+                // userInfoCookie.Path = "/admin/";
+                Response.Cookies.Add(userInfoCookie);
+                //1.3返回登录成功信息
                 ajaxMsg.Msg = "登录成功！";
                 ajaxMsg.Statu = "ok";
                 ajaxMsg.BackUrl = "/admin/admin/Index";
-
+              
             }
             else
             {
@@ -62,5 +73,6 @@ namespace MVCOA.Logic.Admin
         {
             return View();
         } 
+
     }
 }

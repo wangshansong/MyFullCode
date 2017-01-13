@@ -21,7 +21,5 @@ namespace Common
         {
             return FormsAuthentication.HashPasswordForStoringInConfigFile(str, "MD5").ToLower();
         }
-
-        public static string 
     }
 }

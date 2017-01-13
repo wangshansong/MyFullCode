@@ -54,6 +54,7 @@
       <DependentUpon>OuOA.tt</DependentUpon>
     </Compile>
     <Compile Include="Class1.cs" />
+    <Compile Include="ExtensionModel\Ou_UserInfo.cs" />
     <Compile Include="FormatModel\AjaxMsgModel.cs" />
     <Compile Include="OuOA.Context.cs">
       <AutoGen>True</AutoGen>
