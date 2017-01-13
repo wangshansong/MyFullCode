@@ -42,65 +42,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCOA.Helper", "MVCOA.Helpe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCOA.Logic.Admin", "MVCOA.Logic.Admin\MVCOA.Logic.Admin.csproj", "{124BE0C4-B12F-4A28-ACD3-EA95DF977882}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DOC", "DOC", "{B7E3F94B-1874-4BCA-9EDF-086293DD72B6}"
+	ProjectSection(SolutionItems) = preProject
+		C:\Users\Administrator\Desktop\权限表.png = C:\Users\Administrator\Desktop\权限表.png
+	EndProjectSection
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 14
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://wangshansong2015.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = BLLA\\BLLA.csproj
-		SccProjectTopLevelParentUniqueName1 = MVCOA.sln
-		SccProjectName1 = BLLA
-		SccLocalPath1 = BLLA
-		SccProjectUniqueName2 = BLLB\\BLLB.csproj
-		SccProjectTopLevelParentUniqueName2 = MVCOA.sln
-		SccProjectName2 = BLLB
-		SccLocalPath2 = BLLB
-		SccProjectUniqueName3 = Common\\Common.csproj
-		SccProjectTopLevelParentUniqueName3 = MVCOA.sln
-		SccProjectName3 = Common
-		SccLocalPath3 = Common
-		SccProjectUniqueName4 = DALA\\DALMySQL.csproj
-		SccProjectTopLevelParentUniqueName4 = MVCOA.sln
-		SccProjectName4 = DALA
-		SccLocalPath4 = DALA
-		SccProjectUniqueName5 = DALB\\DALMSSQL.csproj
-		SccProjectTopLevelParentUniqueName5 = MVCOA.sln
-		SccProjectName5 = DALB
-		SccLocalPath5 = DALB
-		SccProjectUniqueName6 = DI\\DI.csproj
-		SccProjectTopLevelParentUniqueName6 = MVCOA.sln
-		SccProjectName6 = DI
-		SccLocalPath6 = DI
-		SccProjectUniqueName7 = IBLL\\IBLL.csproj
-		SccProjectTopLevelParentUniqueName7 = MVCOA.sln
-		SccProjectName7 = IBLL
-		SccLocalPath7 = IBLL
-		SccProjectUniqueName8 = IDAL\\IDAL.csproj
-		SccProjectTopLevelParentUniqueName8 = MVCOA.sln
-		SccProjectName8 = IDAL
-		SccLocalPath8 = IDAL
-		SccProjectUniqueName9 = MODEL\\MODEL.csproj
-		SccProjectTopLevelParentUniqueName9 = MVCOA.sln
-		SccProjectName9 = MODEL
-		SccLocalPath9 = MODEL
-		SccProjectUniqueName10 = MVCOA.Logic\\MVCOA.Logic.csproj
-		SccProjectTopLevelParentUniqueName10 = MVCOA.sln
-		SccProjectName10 = MVCOA.Logic
-		SccLocalPath10 = MVCOA.Logic
-		SccProjectUniqueName11 = MVCOA\\MVCOA.csproj
-		SccProjectTopLevelParentUniqueName11 = MVCOA.sln
-		SccProjectName11 = MVCOA
-		SccLocalPath11 = MVCOA
-		SccProjectUniqueName12 = MVCOA.Helper\\MVCOA.Helper.csproj
-		SccProjectTopLevelParentUniqueName12 = MVCOA.sln
-		SccProjectName12 = MVCOA.Helper
-		SccLocalPath12 = MVCOA.Helper
-		SccProjectUniqueName13 = MVCOA.Logic.Admin\\MVCOA.Logic.Admin.csproj
-		SccProjectTopLevelParentUniqueName13 = MVCOA.sln
-		SccProjectName13 = MVCOA.Logic.Admin
-		SccLocalPath13 = MVCOA.Logic.Admin
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -176,5 +123,6 @@ Global
 		{2E898921-4CEC-432E-98D5-C192221B4E3C} = {C8CFF436-9B19-492F-993D-8ECFF7BFEAFA}
 		{DCEDCEBB-230B-442B-AF28-D1A2C6E300B0} = {C8CFF436-9B19-492F-993D-8ECFF7BFEAFA}
 		{8CAF0308-6E2A-4715-9B65-5DAE37F20BB2} = {C8CFF436-9B19-492F-993D-8ECFF7BFEAFA}
+		{B7E3F94B-1874-4BCA-9EDF-086293DD72B6} = {9C0C0AD1-1D58-4D33-8A02-2BD9CEDC2892}
 	EndGlobalSection
 EndGlobal
