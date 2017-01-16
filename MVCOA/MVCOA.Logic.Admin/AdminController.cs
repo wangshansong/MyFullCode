@@ -23,7 +23,7 @@ namespace MVCOA.Logic.Admin
         [HttpGet]
         public ActionResult Login()
         {
-
+    
             return View();
         }
 
@@ -39,8 +39,10 @@ namespace MVCOA.Logic.Admin
             string strName = collection["txtName"].ToString();
             string strPwd = collection["txtPwd"].ToString();
             MODEL.Ou_UserInfo user = OperateContext.BLLSession.IOu_UserInfoBLL.Login(strName, strPwd);
+
             if (user != null)
             {
+              List<MODEL.Ou_Permission> plist =    OperateContext.GetUserPermission(user.uId);
                 //1.1登录成功之后将数据写入到Session中
                 Session["ainfo"] = user;
                 //1.2登录成功之后将数据写入到Cookie中

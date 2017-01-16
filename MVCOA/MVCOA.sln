@@ -44,7 +44,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCOA.Logic.Admin", "MVCOA.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DOC", "DOC", "{B7E3F94B-1874-4BCA-9EDF-086293DD72B6}"
 	ProjectSection(SolutionItems) = preProject
-		C:\Users\Administrator\Desktop\权限表.png = C:\Users\Administrator\Desktop\权限表.png
+		C:\Users\Administrator\Desktop\权限表.jpg = C:\Users\Administrator\Desktop\权限表.jpg
 	EndProjectSection
 EndProject
 Global

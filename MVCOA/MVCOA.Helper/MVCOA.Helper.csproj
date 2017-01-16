@@ -55,6 +55,10 @@
       <Project>{fdbf2fd5-d8ab-4f30-b6e6-dbbce5dd86c2}</Project>
       <Name>IBLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MODEL\MODEL.csproj">
+      <Project>{8caf0308-6e2a-4715-9b65-5dae37f20bb2}</Project>
+      <Name>MODEL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
