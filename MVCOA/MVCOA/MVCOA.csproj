@@ -464,7 +464,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Areas\Admin\Views\Web.config" />
     <Content Include="Areas\Admin\Views\Admin\Login.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="EasyUI\themes\black\images\Thumbs.db" />
@@ -472,6 +471,7 @@
     <Content Include="EasyUI\themes\default\images\Thumbs.db" />
     <Content Include="EasyUI\themes\gray\images\Thumbs.db" />
     <Content Include="EasyUI\themes\metro\images\Thumbs.db" />
+    <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
