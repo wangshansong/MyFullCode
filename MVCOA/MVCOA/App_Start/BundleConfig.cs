@@ -49,8 +49,19 @@ namespace MVCOA
                 "~/Scripts/jquery.msgProcess.js"//自己写的一个
                 ));
 
+            //关于EasyUI的一些JS文件
+            bundles.Add(new ScriptBundle("~/easyUIJS").Include(
+                          "~/Scripts/jquery.min.js",
+                "~/EasyUI/jquery.easyui.min.js",
+                "~/Scripts/jquery.msgProcess.js",
+                "~/EasyUI/locale/easyui-lang-zh_CN.js"
+                ));
 
-
+            //关于EasyUI的一些CSS文件
+            bundles.Add(new StyleBundle("~/easyUICSS").Include(
+               "~/EasyUI/themes/icon.css",
+               "~/EasyUI/themes/default/easyui.css"
+                ));
 
             //开启合并
             BundleTable.EnableOptimizations = true;
