@@ -18,14 +18,6 @@ namespace MVCOA
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
 
-            //合并JQuery脚本的请求，让他们一起发送到浏览器，提高效率。
-            bundles.Add(new ScriptBundle("~/mvcAjax").Include(
-                "~/Scripts/jquery-1.8.2.min.js", //JQuery插件
-                "~/Scripts/jquery.unobtrusive-ajax.min.js",//微软JQuery的ajax插件
-                "~/Scripts/jquery.validate.js",//JQuery验证插件
-                "~/Scripts/jquery.validate.unobtrusive.js"//微软JQuery的非侵入式验证插件
-                ));
-
             // 使用要用于开发和学习的 Modernizr 的开发版本。然后，当你做好
             // 生产准备时，请使用 http://modernizr.com 上的生成工具来仅选择所需的测试。
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
@@ -45,7 +37,20 @@ namespace MVCOA
                         "~/Content/themes/base/jquery.ui.tabs.css",
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
-                        "~/Content/themes/base/jquery.ui.theme.css"));
+                        "~/Content/themes/base/jquery.ui.theme.css"
+                        ));
+
+            //合并JQuery脚本的请求，让他们一起发送到浏览器，提高效率。
+            bundles.Add(new ScriptBundle("~/mvcAjax").Include(
+                "~/Scripts/jquery-1.8.2.min.js", //JQuery插件
+                "~/Scripts/jquery.unobtrusive-ajax.min.js",//微软JQuery的ajax插件
+                "~/Scripts/jquery.validate.js",//JQuery验证插件
+                "~/Scripts/jquery.validate.unobtrusive.js",//微软JQuery的非侵入式验证插件
+                "~/Scripts/jquery.msgProcess.js"//自己写的一个
+                ));
+
+
+
 
             //开启合并
             BundleTable.EnableOptimizations = true;
