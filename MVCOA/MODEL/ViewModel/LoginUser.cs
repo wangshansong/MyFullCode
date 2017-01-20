@@ -22,6 +22,6 @@ namespace MODEL.ViewModel
         /// <summary>
         /// 是否记住用户名 
         /// </summary>
-        public bool isalways { get; set; }
+        public bool isAlways { get; set; }
     }
 }
