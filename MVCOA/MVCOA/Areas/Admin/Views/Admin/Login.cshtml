@@ -1,7 +1,11 @@
-﻿@{
+﻿@model MODEL.ViewModel.LoginUser   
+
+@{
     Layout = null;
 }
+@*转换成强类型视图*@
 
+  
 <!DOCTYPE html>
 
 <html>
@@ -14,10 +18,13 @@
             display: none;
             /*visibility: hidden;*/ /*会导致重绘*/
         }
+        #loginTable td {
+            border:#0094ff
+        }
+
     </style>
 
     @Scripts.Render("~/mvcAjax")    @*请求BundleConfig.cs中mvcAjax合并的脚本*@
-    <script type="text/javascript" src="~/Scripts/jquery.msgProcess.js"></script>
     <script type="text/javascript">
         //成功时调用，接收控制的返回值
         function Success(josnData)
@@ -32,13 +39,31 @@
 {
     HttpMethod = "post",
     OnSuccess = "Success",
-    LoadingElementId = "loadMsg"  
+    LoadingElementId = "loadMsg"
 }))
 {
-    <input type="text" name="txtName" value="admin" /><br />
+    <table id="loginTable">
+        <tr>
+            <td>用户名：</td>
+            <td>@Html.TextBoxFor(u => u.uLoginName, new { Value = "admin" })</td>
+        </tr>
+        <tr>
+            <td>密码：</td>
+            <td>@Html.PasswordFor(u => u.uPwd, new { Value="123"})</td>
+        </tr>
+        <tr>
+            <td>记住用户名</td>
+            <td>@Html.CheckBoxFor(u => u.isAlways)</td>
+        </tr>
+        <tr >
+            <td colspan="2"><input type="submit" value="登录" /></td>
+        </tr>
+    </table>
+
+    @*<input type="text" name="txtName" value="admin" /><br />
     <input type="password" name="txtPwd" value="123" /><br />
-    <input type="checkbox" name="isAllway" value="1" /><span>记住用户名</span>
-    <input type="submit" value="登录"/>
+    <input type="checkbox" name="isAllway" value="1" /><span>记住用户名</span>*@
+    @*<input type="submit" value="登录"/>*@
 }
     <div id="loadMsg">
         正在加载中。。。。
