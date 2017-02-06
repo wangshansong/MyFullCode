@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;//验证 的程序集
 
 namespace MODEL.ViewModel
 {
@@ -14,10 +15,12 @@ namespace MODEL.ViewModel
         /// <summary>
         /// 登录用户命名
         /// </summary>
+        [Required] //验证，必填项
         public string uLoginName { get; set; }
         /// <summary>
         /// 登录密码
         /// </summary>
+        [Required]
         public string uPwd { get; set; }
         /// <summary>
         /// 是否记住用户名 

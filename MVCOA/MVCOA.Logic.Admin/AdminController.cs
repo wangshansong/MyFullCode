@@ -23,7 +23,6 @@ namespace MVCOA.Logic.Admin
         [HttpGet]
         public ActionResult Login()
         {
-    
             return View();
         }
 
