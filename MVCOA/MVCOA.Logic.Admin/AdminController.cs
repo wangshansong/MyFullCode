@@ -50,7 +50,7 @@ namespace MVCOA.Logic.Admin
                     string strEncryptUserInfo = SecurityHelper.EncryptUserInfo(user.uLoginName);
                     HttpCookie userInfoCookie = new HttpCookie("aInfo", strEncryptUserInfo);
                     userInfoCookie.Expires = DateTime.Now.AddDays(1);//设置失效时间
-                    // userInfoCookie.Path = "/admin/";
+                    userInfoCookie.Path = "/admin/";//访问路径包含这个时候才发送Cookie
                     Response.Cookies.Add(userInfoCookie);
                 }
 
