@@ -126,7 +126,7 @@ namespace MVCOA.Helper
                 if (oContext == null)
                 {
                     oContext = new OperateContext();
-                    CallContext.SetData(strOperateContextName,oContext)
+                    CallContext.SetData(strOperateContextName, oContext);
                     
                 }
                 return oContext;
