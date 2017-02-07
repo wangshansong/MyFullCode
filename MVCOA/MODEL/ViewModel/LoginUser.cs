@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;//验证 的程序集
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;//验证 的程序集
 
 namespace MODEL.ViewModel
 {
