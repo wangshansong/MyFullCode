@@ -121,7 +121,7 @@ namespace MVCOA.Helper
         {
             get
             {
-                string strOperateContextName = typeof(OperateContext).Name;
+                string strOperateContextName = typeof(OperateContext).FullName;
                 OperateContext oContext = CallContext.GetData(strOperateContextName) as OperateContext;
                 if (oContext == null)
                 {
