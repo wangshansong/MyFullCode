@@ -33,24 +33,19 @@ namespace MVCOA.Logic.Admin
         [HttpPost]
         public ActionResult Login(MODEL.ViewModel.LoginUser userInfo)
         {
-            AjaxMsgModel ajaxMsg = new AjaxMsgModel { Statu = "err", Msg = "登录失败" };
-
+            if (!ModelState.IsValid) 
+            {
+                return OperateContext.Current.RedirectAjax("err", "没有权限！", null, "");
+            }
             if (OperateContext.Current.LoginAdmin(userInfo))
             {
-                //1.4返回登录成功信息
-                ajaxMsg.Msg = "登录成功！";
-                ajaxMsg.Statu = "ok";
-                ajaxMsg.BackUrl = "/admin/admin/Index";
-
+                return OperateContext.Current.RedirectAjax("ok", "登录成功！", null, "/admin/admin/Index");
             }
             else
             {
-                ajaxMsg.Msg = "登录失败！";
-                ajaxMsg.Statu = "err";
-
+                return OperateContext.Current.RedirectAjax("err", "登录失败！", null, "");
             }
 
-            return Json(ajaxMsg);
         }
 
         /// <summary>

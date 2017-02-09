@@ -17,7 +17,7 @@ namespace MVCOA.Logic.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional },
+                new { action = "Admin", id = UrlParameter.Optional },
                 new string[1] { "MVCOA.Logic.Admin" }
             );
         }

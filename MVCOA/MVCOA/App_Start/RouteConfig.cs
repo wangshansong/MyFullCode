@@ -14,10 +14,10 @@ namespace MVCOA
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Default",
+                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                namespaces:new string[1]{"MVCOA.Logic"}
+                namespaces: new string[1] { "MVCOA.Logic" }
             );
         }
     }

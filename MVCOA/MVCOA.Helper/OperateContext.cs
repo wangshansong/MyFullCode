@@ -8,6 +8,8 @@ using DI;
 using System.Web;
 using System.Web.SessionState;
 using System.Runtime.Remoting.Messaging;
+using System.Web.Mvc;
+
 namespace MVCOA.Helper
 {
     /// <summary>
@@ -216,5 +218,29 @@ namespace MVCOA.Helper
         } 
         #endregion
 
+        //---------------------------------------------3.0 公用操作方法--------------------
+        #region 3.1 生成 Json 格式的返回值 +ActionResult RedirectAjax(string statu, string msg, object data, string backurl)
+        /// <summary>
+        /// 生成 Json 格式的返回值
+        /// </summary>
+        /// <param name="statu">状态 ok：成功 、 err：失败</param>
+        /// <param name="msg">消息内容</param>
+        /// <param name="data">返回的数据</param>
+        /// <param name="backurl">跳转地址URL</param>
+        /// <returns></returns>
+        public ActionResult RedirectAjax(string statu, string msg, object data, string backurl)
+        {
+            MODEL.FormatModel.AjaxMsgModel ajax = new MODEL.FormatModel.AjaxMsgModel()
+            {
+                Statu = statu,
+                Msg = msg,
+                Data = data,
+                BackUrl = backurl
+            };
+            JsonResult res = new JsonResult();
+            res.Data = ajax;
+            return res;
+        }
+        #endregion
     }
 }
