@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using MVCOA.Logic.Admin.Filters;
+using System.Web;
 using System.Web.Mvc;
 
 namespace MVCOA
@@ -8,6 +9,7 @@ namespace MVCOA
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new LoginValidateAttribute());
         }
     }
 }

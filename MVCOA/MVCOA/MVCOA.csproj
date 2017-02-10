@@ -515,6 +515,10 @@
       <Project>{8caf0308-6e2a-4715-9b65-5dae37f20bb2}</Project>
       <Name>MODEL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MVCOA.Logic.Admin\MVCOA.Logic.Admin.csproj">
+      <Project>{124be0c4-b12f-4a28-acd3-ea95df977882}</Project>
+      <Name>MVCOA.Logic.Admin</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MVCOA.Logic\MVCOA.Logic.csproj">
       <Project>{39f9a482-4414-4ef0-9e60-bb41c3b4b7dd}</Project>
       <Name>MVCOA.Logic</Name>

@@ -112,7 +112,7 @@ namespace MVCOA.Helper
         public OperateContext()
         {
             BLLSession = DI.SpringHelper.GetObject<IBLLSession>(Admin_LogicSessionKey);
-        } 
+        }
         #endregion
 
         #region 1.0 获取当前 操作上下文 + OperateContext Current
@@ -122,18 +122,18 @@ namespace MVCOA.Helper
         public static OperateContext Current
         {
             get
-            {
+          {
                 string strOperateContextName = typeof(OperateContext).FullName;
                 OperateContext oContext = CallContext.GetData(strOperateContextName) as OperateContext;
                 if (oContext == null)
                 {
                     oContext = new OperateContext();
                     CallContext.SetData(strOperateContextName, oContext);
-                    
+
                 }
                 return oContext;
             }
-        } 
+        }
         #endregion
 
         //---------------------------------------------2.0 登陆权限 等系统操作--------------------
@@ -143,7 +143,7 @@ namespace MVCOA.Helper
         /// </summary>
         /// <param name="userID"></param>
         /// <returns></returns>
-        public  List<MODEL.Ou_Permission> GetUserPermission(int userID)
+        public List<MODEL.Ou_Permission> GetUserPermission(int userID)
         {
             List<MODEL.Ou_Permission> userAllPermssion = new List<MODEL.Ou_Permission>();
             //1.0根据用户的ID查询用户的角色
@@ -160,7 +160,7 @@ namespace MVCOA.Helper
             userAllPermssion.AddRange(permissionList);
             userAllPermssion.AddRange(vipPermissonList);
             return userAllPermssion;
-        } 
+        }
         #endregion
 
         #region 2.1 管理员登录方法 + bool LoginAdmin(MODEL.ViewModel.LoginUser usrPara)
@@ -180,7 +180,7 @@ namespace MVCOA.Helper
                 if (usrPara.isAlways)
                 {
                     //2.1.2将用户id加密成字符串
-                    string strCookieValue =Common.SecurityHelper.EncryptUserInfo(usr.uId.ToString());
+                    string strCookieValue = Common.SecurityHelper.EncryptUserInfo(usr.uId.ToString());
                     //2.1.3创建cookie
                     HttpCookie cookie = new HttpCookie(Admin_InfoKey, strCookieValue);
                     cookie.Expires = DateTime.Now.AddDays(1);
@@ -215,7 +215,7 @@ namespace MVCOA.Helper
                 }
             }
             return true;
-        } 
+        }
         #endregion
 
         //---------------------------------------------3.0 公用操作方法--------------------
@@ -242,5 +242,44 @@ namespace MVCOA.Helper
             return res;
         }
         #endregion
+
+        /// <summary>
+        /// 重定向
+        /// </summary>
+        /// <param name="url">跳转地址</param>
+        /// <param name="action">提供有关操作方法的信息，如操作方法的名称、控制器、参数、特性和筛选器。</param>
+        /// <returns></returns>
+        public ActionResult Redirect(string url, ActionDescriptor action)
+        {
+            if (action.IsDefined(typeof(Common.Attributes.AjaxRequestAttribute), false)
+                || action.ControllerDescriptor.IsDefined(typeof(Common.Attributes.AjaxRequestAttribute), false)
+                )
+            {
+                return RedirectAjax("nologin", "您没有登陆或没有权限访问此页面~~", null, url);
+            }
+            else
+            {
+                return new RedirectResult(url);
+            }
+        }
+
+        /// <summary>
+        /// 判断是否有权限
+        /// </summary>
+        /// <param name="areaName">区域名</param>
+        /// <param name="controllerName">控制器名</param>
+        /// <param name="actionName">方法名</param>
+        /// <param name="httpMethod">访问方式Get/Post</param>
+        /// <returns></returns>
+        public bool HasPemission(string areaName, string controllerName, string actionName, string httpMethod)
+        {
+            var listP = from per in UserPermission
+                        where string.Equals(per.pAreaName, areaName, StringComparison.CurrentCultureIgnoreCase)
+                        && string.Equals(per.pControllerName, controllerName, StringComparison.CurrentCultureIgnoreCase)
+                        && string.Equals(per.pActionName, actionName, StringComparison.CurrentCultureIgnoreCase)
+                        && per.pFormMethod == (httpMethod.ToLower() == "get" ? 1 : 2)
+                        select per;
+            return listP.Count() > 0;
+        }
     }
 }

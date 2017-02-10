@@ -21,6 +21,7 @@ namespace MVCOA.Logic.Admin
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Common.Attributes.Skip]
         public ActionResult Login()
         {
             return View();
@@ -31,9 +32,10 @@ namespace MVCOA.Logic.Admin
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+       [Common.Attributes.Skip]
         public ActionResult Login(MODEL.ViewModel.LoginUser userInfo)
         {
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
                 return OperateContext.Current.RedirectAjax("err", "没有权限！", null, "");
             }

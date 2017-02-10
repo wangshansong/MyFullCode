@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="AdminAreaRegistration.cs" />
     <Compile Include="AdminController.cs" />
+    <Compile Include="Filters\LoginValidateAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

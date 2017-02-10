@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\AjaxRequestAttribute.cs" />
+    <Compile Include="Attributes\SkipAttribute.cs" />
     <Compile Include="ConfigurationHelper.cs" />
     <Compile Include="DataHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
