@@ -17,6 +17,10 @@
                     alert("ERR:" + data.Msg);
                     if (funcErr) funcErr(data);
                     break;
+                case "nologin":
+                    alert(data.Msg);
+                    window.location = data.BackUrl;
+                    break;
             }
         }
     });

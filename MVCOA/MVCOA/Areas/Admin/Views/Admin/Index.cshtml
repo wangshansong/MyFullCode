@@ -7,13 +7,40 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-    @Styles.Render("~/easyUICSS")
+    <title>页面管理</title>
+    @Styles.Render("~/EasyUI/themes/default/easyuiCSS")
+    @Styles.Render("~/EasyUI/themes/iconCSS")
     @Scripts.Render("~/easyUIJS")
+    <script>
+        $(function () {
+            $("#menuTree").tree({
+                url: '/admin/admin/getMenuData',
+                animate: true,
+                onClick: function(node){
+                    alert(node.id +"--"+node.text);  // 在用户点击的时候提示
+                }
+
+        });
+        });
+    </script>
 </head>
-<body>
-    <div>
-        我是Index
+<body id="cc" class="easyui-layout" style="margin:1px">
+    @*页面顶部*@
+    <div data-options="region:'north',split:true" style="height: 100px; font-size: 32px; text-align: center">
+        OA权限管理系统
+    </div>
+    @*页面左侧菜单*@
+    <div data-options="region:'west',title:'菜单导航',split:true" style="width:150px;">
+        @*树形菜单*@
+        <ul id="menuTree"></ul>
+    </div>
+    @*页面右侧主区域*@
+    <div data-options="region:'center'" style="padding:5px;background:#eee;">
+        <div id="tbs" class="easyui-tabs" data-options="fit:true,border:false">
+            <div title="欢  迎" data-options="href:'/home/index'">
+
+            </div>  
+        </div>
     </div>
 </body>
 </html>

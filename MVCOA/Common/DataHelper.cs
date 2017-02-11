@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using System.Web.Security;
 
 namespace Common
@@ -13,6 +14,11 @@ namespace Common
     public static  class DataHelper
     {
         /// <summary>
+        /// 序列化器对象
+        /// </summary>
+        static JavaScriptSerializer jss = new JavaScriptSerializer();
+
+        /// <summary>
         /// MD5加密
         /// </summary>
         /// <param name="str">要加密的字符串</param>
@@ -21,5 +27,17 @@ namespace Common
         {
             return FormsAuthentication.HashPasswordForStoringInConfigFile(str, "MD5").ToLower();
         }
+
+        /// <summary>
+        /// 将对象进行序列化
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static string ObjToJson(object obj)
+        {
+            return jss.Serialize(obj);
+        }
+
+
     }
 }

@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.SessionState;
 using System.Runtime.Remoting.Messaging;
 using System.Web.Mvc;
+using MODEL.EasyUIModel;
 
 namespace MVCOA.Helper
 {
@@ -84,6 +85,8 @@ namespace MVCOA.Helper
         }
         #endregion
 
+
+
         #region 0.3 业务仓储 + IBLLSession BLLSession;
         /// <summary>
         /// 业务仓储
@@ -115,7 +118,7 @@ namespace MVCOA.Helper
         }
         #endregion
 
-        #region 1.0 获取当前 操作上下文 + OperateContext Current
+        #region 0.6 获取当前 操作上下文 + OperateContext Current
         /// <summary>
         /// 获取当前 操作上下文 (为每个处理浏览器请求的服务器线程 单独创建 操作上下文)
         /// </summary>
@@ -135,6 +138,25 @@ namespace MVCOA.Helper
             }
         }
         #endregion
+
+        #region 0.7 获取当前登陆用户的权限树Json字符串 +string UserTreeJsonStr
+        /// <summary>
+        /// 获取当前登陆用户的权限树Json字符串
+        /// </summary>
+        public string UserTreeJsonStr
+        {
+            get
+            {
+                if (Session[Admin_TreeString] == null )
+                {
+                  List<TreeNode> nodeList =   MODEL.Ou_Permission.ToTreeNodes(UserPermission.FindAll(p=>p.pIsShow ==true));
+                  Session[Admin_TreeString] = Common.DataHelper.ObjToJson(nodeList);
+                }
+                return Session[Admin_TreeString].ToString();
+            }
+        }
+        #endregion
+
 
         //---------------------------------------------2.0 登陆权限 等系统操作--------------------
         #region 2.0 根据用户的 ID查询用户的权限  +  List<MODEL.Ou_Permission> GetUserPermission(int userID)
@@ -218,6 +240,8 @@ namespace MVCOA.Helper
         }
         #endregion
 
+
+
         //---------------------------------------------3.0 公用操作方法--------------------
         #region 3.1 生成 Json 格式的返回值 +ActionResult RedirectAjax(string statu, string msg, object data, string backurl)
         /// <summary>
@@ -243,6 +267,7 @@ namespace MVCOA.Helper
         }
         #endregion
 
+        #region 3.2 重定向 + ActionResult Redirect(string url, ActionDescriptor action)
         /// <summary>
         /// 重定向
         /// </summary>
@@ -261,8 +286,10 @@ namespace MVCOA.Helper
             {
                 return new RedirectResult(url);
             }
-        }
+        } 
+        #endregion
 
+        #region 3.3 判断是否有权限 +  bool HasPemission(string areaName, string controllerName, string actionName, string httpMethod)
         /// <summary>
         /// 判断是否有权限
         /// </summary>
@@ -280,6 +307,7 @@ namespace MVCOA.Helper
                         && per.pFormMethod == (httpMethod.ToLower() == "get" ? 1 : 2)
                         select per;
             return listP.Count() > 0;
-        }
+        } 
+        #endregion
     }
 }

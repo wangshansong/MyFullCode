@@ -51,17 +51,22 @@ namespace MVCOA
 
             //关于EasyUI的一些JS文件
             bundles.Add(new ScriptBundle("~/easyUIJS").Include(
-                          "~/Scripts/jquery.min.js",
+                "~/Scripts/jquery.min.js",
                 "~/EasyUI/jquery.easyui.min.js",
                 "~/Scripts/jquery.msgProcess.js",
                 "~/EasyUI/locale/easyui-lang-zh_CN.js"
                 ));
 
             //关于EasyUI的一些CSS文件
-            bundles.Add(new StyleBundle("~/easyUICSS").Include(
-               "~/EasyUI/themes/icon.css",
-               "~/EasyUI/themes/default/easyui.css"
+            //    //因为css中可能使用到了 相对路径的图片，所以 需要为 虚拟路径 指定到 能找到图片的 路径
+            bundles.Add(new StyleBundle("~/EasyUI/themes/default/easyuiCSS").Include(
+                    "~/EasyUI/themes/default/easyui.css"
+
                 ));
+            bundles.Add(new StyleBundle("~/EasyUI/themes/iconCSS").Include(
+                 "~/EasyUI/themes/icon.css"
+                ));
+                           
 
             //开启合并
             BundleTable.EnableOptimizations = true;

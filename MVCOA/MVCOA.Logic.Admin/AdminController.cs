@@ -32,7 +32,7 @@ namespace MVCOA.Logic.Admin
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-       [Common.Attributes.Skip]
+        [Common.Attributes.Skip]
         public ActionResult Login(MODEL.ViewModel.LoginUser userInfo)
         {
             if (!ModelState.IsValid)
@@ -57,6 +57,15 @@ namespace MVCOA.Logic.Admin
         public ActionResult Index()
         {
             return View();
+        }
+
+        /// <summary>
+        /// 获取树形菜单数据
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetMenuData()
+        {
+            return Content(OperateContext.Current.UserTreeJsonStr);
         }
 
     }
