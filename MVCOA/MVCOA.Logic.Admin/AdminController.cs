@@ -1,4 +1,5 @@
 ﻿using Common;
+using Common.Attributes;
 using MODEL.FormatModel;
 using MVCOA.Helper;
 using System;
@@ -63,6 +64,7 @@ namespace MVCOA.Logic.Admin
         /// 获取树形菜单数据
         /// </summary>
         /// <returns></returns>
+        [AjaxRequest]
         public ActionResult GetMenuData()
         {
             return Content(OperateContext.Current.UserTreeJsonStr);
