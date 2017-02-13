@@ -31,6 +31,10 @@
         //追加一个新的Tab页
         function newTab(treeNode)
         {
+            //获取当前节点是否有子节点，只有没有节点的菜单才生成tab页
+            if ($(this).tree("getChildren", treeNode.target).length >0) {
+                return false;
+            } 
                 var $tbs = $("#tbs");//获取tab容器
                 var pp = $('#tbs').tabs('getSelected');
                 //新根据 标题 判断 是否以存在 同名tab
