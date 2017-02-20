@@ -54,6 +54,7 @@
       <DependentUpon>OuOA.tt</DependentUpon>
     </Compile>
     <Compile Include="Class1.cs" />
+    <Compile Include="EasyUIModel\DataGridModel.cs" />
     <Compile Include="EasyUIModel\TreeNode.cs" />
     <Compile Include="ExtensionModel\Ou_Permission.cs" />
     <Compile Include="ExtensionModel\Ou_UserInfo.cs" />

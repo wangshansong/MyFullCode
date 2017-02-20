@@ -49,6 +49,7 @@
     <Compile Include="AdminController.cs" />
     <Compile Include="Filters\LoginValidateAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SysController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

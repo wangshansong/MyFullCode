@@ -1,0 +1,84 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Permission</title>
+    @Styles.Render("~/EasyUI/themes/default/easyuiCSS")
+        @Styles.Render("~/EasyUI/themes/iconCSS")
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/EasyUI/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/EasyUI/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#editWin').window('close');
+            $("#tbList").datagrid({
+                fit:true,
+                striped: true,
+                singleSelect: true,
+                url: '/admin/sys/GetPermData',
+                queryParams: {},
+                loadMsg: '数据加载中请稍后……',
+                pagination: true,
+                rownumbers: true,
+                columns: [[
+                      { field: 'pid', title: 'ID', width: 100 },
+                      { field: 'pName', title: '权限名', width: 100 },
+                      { field: 'pArea', title: '区域名', width: 100 },
+                      { field: 'pControllerName', title: '控制器名', width: 100 },
+                      { field: 'pActionName', title: 'Action', width: 100 },
+                      { field: 'pFormMethod', title: '请求方式', width: 100 ,
+                                                  formatter: function (value, row, index) {
+                                                      return value == "1" ? "GET" : "POST";
+                                                  }
+                      },
+                      { field: 'pOperationType', title: '操作类型', width: 100,
+                                                  formatter: function (value, row, index) {
+                                                      return value == "0" ? "无操作" : value == "1" ? "easyui连接" : "打开新窗体";
+                                                  }
+                      }
+                ]],
+                toolbar: [ {
+                    iconCls: 'icon-add',
+                    text: "新增",
+                    handler: function () { alert('新增按钮') }
+                }, '-',
+                {
+                    iconCls: 'icon-edit',
+                    text: "编辑",
+                    handler: editRow
+                }, ],
+            });
+
+        });
+
+        function editRow()
+        {
+            //获取选中行里的数据
+            var rowData = $("#tbList").datagrid("getSelected");
+            $('#editWin').window('open');
+            //异步请求 权限修改页面，并直接加载到 当前的 修改窗体中
+            //载入远程 HTML 文件代码并插入至 DOM 中。
+            $("#modifyForm").load("/admin/sys/editpermission/" + rowData.pid, null, function () {
+
+            });
+
+        }   
+    </script>
+</head>
+<body>
+    @*数据列表*@
+    <table id="tbList" ></table>
+    @*数据编辑窗口*@
+    <div id="editWin" class="easyui-window" title="My Window" style="width:600px;height:400px"
+         data-options="iconCls:'icon-save',modal:true">
+        <form id="modifyForm" method="post"></form>
+    </div>
+</body>
+</html>
