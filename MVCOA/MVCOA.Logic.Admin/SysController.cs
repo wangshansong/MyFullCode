@@ -19,7 +19,7 @@ namespace MVCOA.Logic.Admin
 
         public ActionResult GetPermData()
         {
-            var pList = OperateContext.Current.BLLSession.IOu_PermissionBLL.GetListBy(p => p.pIsShow == true && p.pIsDel == false).Select(p=>p.ToPOCO());
+            var pList = OperateContext.Current.BLLSession.IOu_PermissionBLL.GetListBy(p => p.pIsShow == true && p.pIsDel == false).Select(p => p.ToPOCO());
 
             DataGridModel datagridModel = new DataGridModel()
             {
@@ -31,13 +31,49 @@ namespace MVCOA.Logic.Admin
             return Json(datagridModel);
         }
 
-    [HttpPost]
+        [HttpGet]
+        /// <summary>
+        /// 加载 权限修改 窗体html
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         public ActionResult Editpermission(int ID)
         {
-            var pList = OperateContext.Current.BLLSession.IOu_PermissionBLL.GetListBy(p =>p.pid == ID).Select(p => p.ToPOCO());
-            
-            return null;
+            // 根据id查询要修改的权限
+            MODEL.ViewModel.Permission viewPermission = OperateContext.Current.BLLSession.IOu_PermissionBLL.GetListBy(p => p.pid == ID).FirstOrDefault().ToViewModel();
+            //准备请求方式下拉框数据
+            ViewBag.httpMethodList = new List<SelectListItem>(){
+              new SelectListItem(){ Text="Get", Value="1" },
+              new SelectListItem(){Text="Post",Value="2"}
+            };
+            /*
+             * 准备操作方式方式下拉框数据
+                0-无操作 1-easyui连接 2-打开新窗体
+             */
+            ViewBag.operationList = new List<SelectListItem>(){
+              new SelectListItem(){ Text="无操作", Value="0" },
+              new SelectListItem(){Text="easyui连接",Value="1"},
+                new SelectListItem(){Text="打开新窗体",Value="2"}
+            };
+            return PartialView(viewPermission);
         }
-        
+
+
+             #region 1.2 权限修改 +EditPermission(MODEL.ViewModel.Permission model)
+        [HttpPost]
+        /// <summary>
+        /// 1.2 权限修改
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult EditPermission(MODEL.Ou_Permission model)
+        {
+            int res = OperateContext.Current.BLLSession.IOu_PermissionBLL.Modify(model, "pName", "pAreaName", "pControllerName", "pActionName", "pFormMethod", "pOperationType", "pOrder", "pIsShow", "pRemark");
+
+            if (res > 0)
+                return Redirect("/admin/sys/Permission?ok");
+            else
+                return Redirect("/admin/sys/Permission?err");
+        }
+        #endregion
     }
 }

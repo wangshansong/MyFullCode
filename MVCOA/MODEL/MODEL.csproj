@@ -112,6 +112,7 @@
       <DependentUpon>OuOA.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\LoginUser.cs" />
+    <Compile Include="ViewModel\Permission.cs" />
     <Compile Include="WF_AutoTransactNode.cs">
       <DependentUpon>OuOA.tt</DependentUpon>
     </Compile>
