@@ -32,7 +32,7 @@ function ShowMsg(msgContent) {
     $.messager.show({
         title: '提示',
         msg: msgContent,
-        timeout: 2000,
+        timeout: 1000,
         showType: 'fade',
         style: {
             right: '',

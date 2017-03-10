@@ -80,7 +80,7 @@ namespace MVCOA.Logic.Admin
 
         public ActionResult DeletePermission(int ID)
         {
-            // 根据id查询要修改的权限
+     
             int res = OperateContext.Current.BLLSession.IOu_PermissionBLL.DelBy(p=>p.pid == ID);
             if (res>0)
             {

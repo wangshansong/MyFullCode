@@ -17,6 +17,7 @@
     <script src="~/EasyUI/locale/easyui-lang-zh_CN.js"></script>
     <script src="~/Scripts/jquery.msgProcess.js"></script>
     <script type="text/javascript">
+        $.ajaxSetup({ cache: false }); //全局关闭JQuery缓存
         $(function () {
             $('#editWin').window('close');
             $("#tbList").datagrid({
@@ -117,7 +118,6 @@
             $("#tbList").datagrid("reload");
         }
 
-       
     </script>
 </head>
 <body>
