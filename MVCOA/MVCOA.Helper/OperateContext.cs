@@ -304,7 +304,7 @@ namespace MVCOA.Helper
                         where string.Equals(per.pAreaName, areaName, StringComparison.CurrentCultureIgnoreCase)
                         && string.Equals(per.pControllerName, controllerName, StringComparison.CurrentCultureIgnoreCase)
                         && string.Equals(per.pActionName, actionName, StringComparison.CurrentCultureIgnoreCase)
-                        && per.pFormMethod == (httpMethod.ToLower() == "get" ? 1 : 2)
+                        && (per.pFormMethod == (httpMethod.ToLower() == "get" ? 1 : 2) || per.pFormMethod == 3)
                         select per;
             return listP.Count() > 0;
         } 

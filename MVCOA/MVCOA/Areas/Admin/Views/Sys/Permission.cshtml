@@ -56,7 +56,18 @@
                     iconCls: 'icon-edit',
                     text: "编辑",
                     handler: editRow
-                }, ],
+                },
+                   {
+                       iconCls: 'icon-remove',
+                       text: "删除",
+                       handler: editRow
+                   },
+                    {
+                        iconCls: 'icon-reload',
+                        text: "刷新",
+                        handler: reloadList
+                    }
+                ],
             });
             initModifyForm();
         });
@@ -70,20 +81,31 @@
             //异步请求 权限修改页面，并直接加载到 当前的 修改窗体中
             //载入远程 HTML 文件代码并插入至 DOM 中。
             $("#modifyForm").load("/admin/sys/editpermission/" + rowData.pid, null, null);
-          
+
         }
 
         //为表单 设置 参数
         function initModifyForm() {
             $('#modifyForm').form({
-                url: "/admin/sys/editpermission",
-                //onSubmit: function () {
-
-                //},
+                url: "/admin/sys/EditPermission",
                 success: function (data) {
-                    alert(data)
+                    //var result = $.parseJSON(data);
+                    //JSON.stringify() //将Json对象转成字符串
+                    var result = JSON.parse(data);//将Json字符串转成对象   
+
+                    $.messager.show({ msg: result.Msg });
+                    reloadList();
                 }
             });
+        }
+
+        //删除一条数据
+        function deleteList() {
+          
+        }
+        //刷新列表
+        function reloadList() {
+            $("#tbList").datagrid("reload");
         }
     </script>
 </head>
@@ -93,9 +115,7 @@
     @*数据编辑窗口*@
     <div id="editWin" class="easyui-window" title="My Window" style="width:600px;height:400px"
          data-options="iconCls:'icon-save',modal:true">
-        <form id="modifyForm" method="post" >
-
-        </form>
+        <form id="modifyForm" method="post"></form>
     </div>
 </body>
 </html>

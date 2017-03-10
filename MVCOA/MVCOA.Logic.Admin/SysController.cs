@@ -1,4 +1,6 @@
-﻿using MODEL.EasyUIModel;
+﻿using Common;
+using MODEL.EasyUIModel;
+using MODEL.FormatModel;
 using MVCOA.Helper;
 using System;
 using System.Collections.Generic;
@@ -37,7 +39,7 @@ namespace MVCOA.Logic.Admin
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public ActionResult Editpermission(int ID)
+        public ActionResult EditPermission(int ID)
         {
             // 根据id查询要修改的权限
             MODEL.ViewModel.Permission viewPermission = OperateContext.Current.BLLSession.IOu_PermissionBLL.GetListBy(p => p.pid == ID).FirstOrDefault().ToViewModel();
@@ -59,7 +61,7 @@ namespace MVCOA.Logic.Admin
         }
 
 
-             #region 1.2 权限修改 +EditPermission(MODEL.ViewModel.Permission model)
+        #region 1.2 权限修改 +EditPermission(MODEL.ViewModel.Permission model)
         [HttpPost]
         /// <summary>
         /// 1.2 权限修改
@@ -69,11 +71,37 @@ namespace MVCOA.Logic.Admin
         {
             int res = OperateContext.Current.BLLSession.IOu_PermissionBLL.Modify(model, "pName", "pAreaName", "pControllerName", "pActionName", "pFormMethod", "pOperationType", "pOrder", "pIsShow", "pRemark");
 
+            AjaxMsgModel msgOK = new AjaxMsgModel()
+             {
+                 Msg = "保存成功！",
+                 Statu = "ok",
+                 BackUrl = "/admin/sys/Permission",
+             };
+
+            AjaxMsgModel msgError = new AjaxMsgModel()
+             {
+                 Msg = "保存成功！",
+                 Statu = "error",
+                 BackUrl = "/admin/sys/Permission",
+             };
+
             if (res > 0)
-                return Redirect("/admin/sys/Permission?ok");
+               return   Content(JsonHelper<AjaxMsgModel>.ModelToJsonString(msgOK));
             else
-                return Redirect("/admin/sys/Permission?err");
+              return    Content(JsonHelper<AjaxMsgModel>.ModelToJsonString(msgError));
         }
         #endregion
+
+        public ActionResult DeletePermission(int ID)
+        {
+            // 根据id查询要修改的权限
+            int res = OperateContext.Current.BLLSession.IOu_PermissionBLL.DelBy(p=>p.pid == ID);
+            if (res>0)
+            {
+      
+            }
+            return null;
+        
+        }
     }
 }
