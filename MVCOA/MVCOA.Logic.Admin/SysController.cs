@@ -71,24 +71,10 @@ namespace MVCOA.Logic.Admin
         {
             int res = OperateContext.Current.BLLSession.IOu_PermissionBLL.Modify(model, "pName", "pAreaName", "pControllerName", "pActionName", "pFormMethod", "pOperationType", "pOrder", "pIsShow", "pRemark");
 
-            AjaxMsgModel msgOK = new AjaxMsgModel()
-             {
-                 Msg = "保存成功！",
-                 Statu = "ok",
-                 BackUrl = "/admin/sys/Permission",
-             };
-
-            AjaxMsgModel msgError = new AjaxMsgModel()
-             {
-                 Msg = "保存成功！",
-                 Statu = "error",
-                 BackUrl = "/admin/sys/Permission",
-             };
-
             if (res > 0)
-               return   Content(JsonHelper<AjaxMsgModel>.ModelToJsonString(msgOK));
+                return OperateContext.Current.RedirectAjax("ok", "修改成功！", null, "/admin/sys/Permission");
             else
-              return    Content(JsonHelper<AjaxMsgModel>.ModelToJsonString(msgError));
+                return OperateContext.Current.RedirectAjax("err", "修改成功！", null, "/admin/sys/Permission");
         }
         #endregion
 
@@ -100,7 +86,7 @@ namespace MVCOA.Logic.Admin
             {
       
             }
-            return null;
+            return Content("");
         
         }
     }
