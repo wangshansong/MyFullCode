@@ -1,0 +1,77 @@
+﻿@model MODEL.ViewModel.Permission
+<style type="text/css">
+    #modifyTb {
+        width: 400px;
+        border: 1px solid #0094ff;
+        margin: 10px auto;
+        border-collapse: collapse;
+    }
+
+        #modifyTb td, #modifyTb th {
+            border: 1px solid #0094ff;
+            padding: 4px;
+        }
+</style>
+
+ @Html.HiddenFor(p=>p.pid)
+<table id="modifyTb">
+    @*权限名称*@
+    <tr> 
+        <td>@Html.LabelFor(p=>p.pName)</td>
+        <td>@Html.TextBoxFor(p=>p.pName)</td>
+        <td>@Html.ValidationMessageFor(p=>p.pName)</td>
+    </tr>
+    @*区域名称*@
+    <tr>
+        <td>@Html.LabelFor(p => p.pAreaName)</td>
+        <td>@Html.TextBoxFor(p => p.pAreaName)</td>
+        <td>@Html.ValidationMessageFor(p => p.pAreaName)</td>
+    </tr>
+    @*控制器名称*@
+    <tr>
+        <td>@Html.LabelFor(p => p.pControllerName)</td>
+        <td>@Html.TextBoxFor(p => p.pControllerName)</td>
+        <td>@Html.ValidationMessageFor(p => p.pControllerName)</td>
+    </tr>
+    @*Action名称*@
+    <tr>
+        <td>@Html.LabelFor(p => p.pActionName)</td>
+        <td>@Html.TextBoxFor(p => p.pActionName)</td>
+        <td>@Html.ValidationMessageFor(p => p.pActionName)</td>
+    </tr>
+    @*访问方式get/post*@
+    <tr>
+        <td>@Html.LabelFor(p => p.pFormMethod)</td>
+        <td>@Html.DropDownListFor(p => p.pFormMethod, ViewBag.httpMethodList as IEnumerable<SelectListItem>)</td>
+        <td>@Html.ValidationMessageFor(p => p.pFormMethod)</td>
+    </tr>
+    @*操作方式*@
+    <tr>
+        <td>@Html.LabelFor(p => p.pOperationType)</td>
+        <td>@Html.DropDownListFor(p => p.pOperationType, ViewBag.operationList as IEnumerable<SelectListItem>)</td>
+        <td>@Html.ValidationMessageFor(p => p.pOperationType)</td>
+    </tr>
+    @*排序序号*@
+    <tr>
+        <td>@Html.LabelFor(p => p.pOrder)</td>
+        <td>@Html.TextBoxFor(p => p.pOrder)</td>
+        <td>@Html.ValidationMessageFor(p => p.pOrder)</td>
+    </tr>
+    @*是否显示*@
+    <tr>
+        <td>@Html.LabelFor(p => p.pIsShow)</td>
+        <td>@Html.TextBoxFor(p => p.pIsShow)</td>
+        <td>@Html.ValidationMessageFor(p => p.pIsShow)</td>
+    </tr>
+    @*备注*@
+    <tr>
+        <td>@Html.LabelFor(p => p.pRemark)</td>
+        <td>@Html.TextBoxFor(p => p.pRemark)</td>
+        <td>@Html.ValidationMessageFor(p => p.pRemark)</td>
+    </tr>
+    <tr>
+        <td colspan="3">
+            <input type="submit" value="保存" />
+        </td>
+    </tr>
+</table>

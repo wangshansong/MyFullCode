@@ -36,6 +36,29 @@ namespace MODEL
 
             return poco;
         }
+        /// <summary>
+        /// 生成ViewModel对象
+        /// </summary>
+        /// <returns></returns>
+        public MODEL.ViewModel.Permission ToViewModel()
+        {
+            MODEL.ViewModel.Permission p = new MODEL.ViewModel.Permission()
+            {
+                pid = this.pid,
+                pParent = this.pParent,
+                pName = this.pName,
+                pAreaName = this.pAreaName,
+                pControllerName = this.pControllerName,
+                pActionName = this.pActionName,
+                pFormMethod = this.pFormMethod,
+                pOperationType = this.pOperationType,
+                pOrder = this.pOrder,
+                pIsShow = this.pIsShow,
+                pRemark = this.pRemark
+            };
+
+            return p;
+        }
 
         /// <summary>
         /// 将当前权限 对象 转成 树节点对象
@@ -89,7 +112,7 @@ namespace MODEL
             foreach (var permission in listPer)
             {
                 //如果父Id == 参数
-                if (permission.pParent == pid )
+                if (permission.pParent == pid)
                 {
                     //将权限对象转换成树节点对象
                     TreeNode node = permission.ToTreeNode();
@@ -98,7 +121,7 @@ namespace MODEL
                     //递归 为这个新创建的 树节点找 子节点
                     LoadTreeNode(listPer, node.children, node.id);
                 }
-            } 
+            }
         }
         #endregion
 

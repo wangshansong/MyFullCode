@@ -28,7 +28,7 @@
     <script type="text/javascript">
         //成功时调用，接收控制的返回值
         function Success(josnData) {
-            $.procAjaxData(josnData, function () { window.location = josnData.BackUrl; });
+            $.procAjaxData(josnData, function (backData) { window.location = backData.BackUrl; });
         }
     </script>
 </head>

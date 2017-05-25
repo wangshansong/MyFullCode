@@ -10,6 +10,7 @@ using System.Web.SessionState;
 using System.Runtime.Remoting.Messaging;
 using System.Web.Mvc;
 using MODEL.EasyUIModel;
+using MODEL.FormatModel;
 
 namespace MVCOA.Helper
 {
@@ -125,7 +126,7 @@ namespace MVCOA.Helper
         public static OperateContext Current
         {
             get
-          {
+            {
                 string strOperateContextName = typeof(OperateContext).FullName;
                 OperateContext oContext = CallContext.GetData(strOperateContextName) as OperateContext;
                 if (oContext == null)
@@ -147,10 +148,10 @@ namespace MVCOA.Helper
         {
             get
             {
-                if (Session[Admin_TreeString] == null )
+                if (Session[Admin_TreeString] == null)
                 {
-                  List<TreeNode> nodeList =   MODEL.Ou_Permission.ToTreeNodes(UserPermission.FindAll(p=>p.pIsShow ==true));
-                  Session[Admin_TreeString] = Common.DataHelper.ObjToJson(nodeList);
+                    List<TreeNode> nodeList = MODEL.Ou_Permission.ToTreeNodes(UserPermission.FindAll(p => p.pIsShow == true));
+                    Session[Admin_TreeString] = Common.DataHelper.ObjToJson(nodeList);
                 }
                 return Session[Admin_TreeString].ToString();
             }
@@ -254,16 +255,17 @@ namespace MVCOA.Helper
         /// <returns></returns>
         public ActionResult RedirectAjax(string statu, string msg, object data, string backurl)
         {
-            MODEL.FormatModel.AjaxMsgModel ajax = new MODEL.FormatModel.AjaxMsgModel()
-            {
-                Statu = statu,
-                Msg = msg,
-                Data = data,
-                BackUrl = backurl
-            };
-            JsonResult res = new JsonResult();
-            res.Data = ajax;
-            return res;
+            AjaxMsgModel ajaxMsg = new AjaxMsgModel()
+              {
+                  Statu = statu,
+                  Msg = msg,
+                  Data = data,
+                  BackUrl = backurl
+              };
+            string strJsonAjaxMsg = Common.JsonHelper<AjaxMsgModel>.ModelToJsonString(ajaxMsg);
+            ContentResult contentResult = new ContentResult();
+            contentResult.Content = strJsonAjaxMsg;
+            return contentResult;
         }
         #endregion
 
@@ -286,7 +288,7 @@ namespace MVCOA.Helper
             {
                 return new RedirectResult(url);
             }
-        } 
+        }
         #endregion
 
         #region 3.3 判断是否有权限 +  bool HasPemission(string areaName, string controllerName, string actionName, string httpMethod)
@@ -304,10 +306,10 @@ namespace MVCOA.Helper
                         where string.Equals(per.pAreaName, areaName, StringComparison.CurrentCultureIgnoreCase)
                         && string.Equals(per.pControllerName, controllerName, StringComparison.CurrentCultureIgnoreCase)
                         && string.Equals(per.pActionName, actionName, StringComparison.CurrentCultureIgnoreCase)
-                        && per.pFormMethod == (httpMethod.ToLower() == "get" ? 1 : 2)
+                        && (per.pFormMethod == (httpMethod.ToLower() == "get" ? 1 : 2) || per.pFormMethod == 3)
                         select per;
             return listP.Count() > 0;
-        } 
+        }
         #endregion
     }
 }
