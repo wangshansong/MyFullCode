@@ -1,4 +1,5 @@
 ﻿using Common;
+using MODEL;
 using MODEL.EasyUIModel;
 using MODEL.FormatModel;
 using MVCOA.Helper;
@@ -21,11 +22,17 @@ namespace MVCOA.Logic.Admin
 
         public ActionResult GetPermData()
         {
-            var pList = OperateContext.Current.BLLSession.IOu_PermissionBLL.GetListBy(p => p.pIsShow == true && p.pIsDel == false).Select(p => p.ToPOCO());
-
+            int pageSize = 0;
+            int pageIndex = 1;
+            int.TryParse(Request.Params["rows"],out pageSize); //页容量
+            int.TryParse(Request.Params["page"], out pageIndex);//页码
+            int rowCount = OperateContext.Current.BLLSession.IOu_PermissionBLL
+                .GetListBy(p => p.pIsShow == true && p.pIsDel == false).Count();
+            var pList = OperateContext.Current.BLLSession.IOu_PermissionBLL.
+                GetPagedList(pageIndex, pageSize, p => p.pIsShow == true && p.pIsDel == false,p=>p.pid).ToList().Select(p=>p.ToPOCO());
             DataGridModel datagridModel = new DataGridModel()
             {
-                total = (pList == null ? 0 : pList.Count()),
+                total =rowCount,
                 rows = pList,
                 footer = null
             };
