@@ -20,6 +20,10 @@ namespace MVCOA.Logic.Admin
             return View();
         }
 
+       /// <summary>
+       /// 查询数据加载到前台列表中
+       /// </summary>
+       /// <returns></returns>
         public ActionResult GetPermData()
         {
             int pageSize = 0;
@@ -51,29 +55,18 @@ namespace MVCOA.Logic.Admin
             // 根据id查询要修改的权限
             MODEL.ViewModel.Permission viewPermission = OperateContext.Current.BLLSession.IOu_PermissionBLL.GetListBy(p => p.pid == ID).FirstOrDefault().ToViewModel();
             //准备请求方式下拉框数据
-            ViewBag.httpMethodList = new List<SelectListItem>(){
-              new SelectListItem(){ Text="Get", Value="1" },
-              new SelectListItem(){Text="Post",Value="2"}
-            };
-            /*
-             * 准备操作方式方式下拉框数据
-                0-无操作 1-easyui连接 2-打开新窗体
-             */
-            ViewBag.operationList = new List<SelectListItem>(){
-              new SelectListItem(){ Text="无操作", Value="0" },
-              new SelectListItem(){Text="easyui连接",Value="1"},
-                new SelectListItem(){Text="打开新窗体",Value="2"}
-            };
+            SetDropdownList();
             return PartialView(viewPermission);
         }
 
 
         #region 1.2 权限修改 +EditPermission(MODEL.ViewModel.Permission model)
-        [HttpPost]
+        
         /// <summary>
         /// 1.2 权限修改
         /// </summary>
         /// <returns></returns>
+        [HttpPost]
         public ActionResult EditPermission(MODEL.Ou_Permission model)
         {
             int res = OperateContext.Current.BLLSession.IOu_PermissionBLL.Modify(model, "pName", "pAreaName", "pControllerName", "pActionName", "pFormMethod", "pOperationType", "pOrder", "pIsShow", "pRemark");
@@ -84,7 +77,23 @@ namespace MVCOA.Logic.Admin
                 return OperateContext.Current.RedirectAjax("err", "修改成功！", null, "/admin/sys/Permission");
         }
         #endregion
+        
+        /// <summary>
+        /// 新增权限
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult AddPermission()
+        {
+            SetDropdownList();
+            return PartialView("EditPermission"); ;
+        }
 
+        /// <summary>
+        /// 删除权限
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         public ActionResult DeletePermission(int ID)
         {
      
@@ -95,6 +104,26 @@ namespace MVCOA.Logic.Admin
             }
             return Content("");
         
+        }
+
+       void SetDropdownList()
+        {
+            //准备请求方式下拉框数据
+            ViewBag.httpMethodList = new List<SelectListItem>(){
+              new SelectListItem(){ Text="Get", Value="1" },
+              new SelectListItem(){Text="Post",Value="2"},
+               new SelectListItem(){Text="Get & Post",Value="3"}
+            };
+            /*
+             * 准备操作方式方式下拉框数据
+                0-无操作 1-easyui连接 2-打开新窗体
+             */
+            ViewBag.operationList = new List<SelectListItem>(){
+              new SelectListItem(){ Text="无操作", Value="0" },
+              new SelectListItem(){Text="easyui连接",Value="1"},
+                new SelectListItem(){Text="打开新窗体",Value="2"}
+            };
+            
         }
     }
 }

@@ -40,3 +40,13 @@ function ShowMsg(msgContent) {
         }
     });
 }
+
+//判断一个字符是否能转成JSON
+function checkIsJSON(s) {
+    try {
+        JSON.parse(s);
+        return true;
+    } catch (e) {
+        return false;
+    }
+}

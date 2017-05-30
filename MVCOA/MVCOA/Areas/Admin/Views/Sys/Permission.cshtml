@@ -33,6 +33,7 @@
                 loadMsg: '数据加载中请稍后……',
                 pagination: true,//是启用示分页，默认pageSize为10
                 rownumbers: true,//是否显示行号
+                pageList: [10, 15, 20, 30, 40, 50], //在设置分页属性的时候 初始化页面大小选择列表,即页容量下拉框
                 columns: [[  //表格列字段
                       { field: 'pid', title: 'ID', width: 100 },
                       { field: 'pName', title: '权限名', width: 100 },
@@ -56,7 +57,7 @@
                 toolbar: [{
                     iconCls: 'icon-add',
                     text: "新增",
-                    handler: function () { alert('新增按钮') }
+                    handler: addRow
                 }, '-',
                 {
                     iconCls: 'icon-edit',
@@ -77,8 +78,7 @@
                     }
                 ],
             });
-            initModifyForm();
-        });
+     });
 
         //编辑选中的数据
         function editRow() {
@@ -91,12 +91,26 @@
             $('#editWin').window("setTitle", "编辑");
             $('#editWin').window('open');
             //异步请求 权限修改页面，并直接加载到 当前的 修改窗体中
+
             //载入远程 HTML 文件代码并插入至 DOM 中。
-            $("#modifyForm").load("/admin/sys/editpermission/" + rowData.pid, null, null);
+            //$("#modifyForm").load("/admin/sys/editpermission/" + rowData.pid, null, null);
+            $.get("/admin/sys/editpermission/" + rowData.pid, null, function (data) {
+                if (checkIsJSON(data)) {
+                    var result = JSON.parse(data);//将Json字符串转成对象   
+                    ShowMsg(result.Msg);//显示消息框
+                    reloadList();//刷新列表
+                }
+                else {
+                    $("#modifyForm").html(data);
+                }
+                
+            })
 
         }
 
-        //为表单 设置 参数
+
+
+        //为修改表单 设置 参数
         function initModifyForm() {
             $('#modifyForm').form({
                 url: "/admin/sys/EditPermission",
@@ -105,7 +119,7 @@
                     //JSON.stringify() //将Json对象转成字符串
                     var result = JSON.parse(data);//将Json字符串转成对象   
                     ShowMsg(result.Msg);//显示消息框
-                    reloadList();
+                    reloadList();//刷新列表
 
                 }
             });
@@ -114,6 +128,12 @@
         //删除一条数据
         function deleteList() {
           
+        }
+        //新增一条数据
+        function addRow() {
+            $('#editWin').window("setTitle", "新增");
+            $('#editWin').window('open');
+            $("#modifyForm").load("/admin/sys/AddPermission", null, null);
         }
         //刷新列表
         function reloadList() {
