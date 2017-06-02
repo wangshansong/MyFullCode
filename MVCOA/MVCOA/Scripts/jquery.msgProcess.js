@@ -20,7 +20,20 @@
                     break;
                 case "nologin":
                     alert(dataObj.Msg);
-                    window.location = dataObj.BackUrl;
+                    $.alertMsg(data.Msg, "系统提示", function () {
+                        if (window.top) //如果有父窗口，则跳转到最顶层的父窗口
+                            window.top.location = data.BackUrl;
+                        else
+                            window.location = data.BackUrl;
+                    });
+                case "noPermission":
+                    alert(dataObj.Msg);
+                    $.alertMsg(data.Msg, "系统提示", function () {
+                        if (window.top) //如果有父窗口，则跳转到最顶层的父窗口
+                            window.top.location = data.BackUrl;
+                        else
+                            window.location = data.BackUrl;
+                    });
                     break;
             }
         }

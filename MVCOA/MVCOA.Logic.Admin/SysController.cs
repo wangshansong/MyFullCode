@@ -44,12 +44,13 @@ namespace MVCOA.Logic.Admin
             return Json(datagridModel);
         }
 
-        [HttpGet]
+        
         /// <summary>
-        /// 加载 权限修改 窗体html
+        /// 加载 权限修改 窗体html  HttpGet
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult EditPermission(int ID)
         {
             // 根据id查询要修改的权限
@@ -61,9 +62,8 @@ namespace MVCOA.Logic.Admin
 
 
         #region 1.2 权限修改 +EditPermission(MODEL.ViewModel.Permission model)
-        
         /// <summary>
-        /// 1.2 权限修改
+        /// 1.2 权限修改POST
         /// </summary>
         /// <returns></returns>
         [HttpPost]
@@ -72,9 +72,9 @@ namespace MVCOA.Logic.Admin
             int res = OperateContext.Current.BLLSession.IOu_PermissionBLL.Modify(model, "pName", "pAreaName", "pControllerName", "pActionName", "pFormMethod", "pOperationType", "pOrder", "pIsShow", "pRemark");
 
             if (res > 0)
-                return OperateContext.Current.RedirectAjax("ok", "修改成功！", null, "/admin/sys/Permission");
+                return  Redirect("/admin/sys/Permission?ok");
             else
-                return OperateContext.Current.RedirectAjax("err", "修改成功！", null, "/admin/sys/Permission");
+                return Redirect("/admin/sys/Permission?error");
         }
         #endregion
         
@@ -88,24 +88,43 @@ namespace MVCOA.Logic.Admin
             SetDropdownList();
             return PartialView("EditPermission"); ;
         }
+        /// <summary>
+        /// 新增权限
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult AddPermission(MODEL.Ou_Permission model)
+        {
+           
+            model.pAddTime = DateTime.Now;
+            model.pIsDel = false;
+            int res = OperateContext.Current.BLLSession.IOu_PermissionBLL.Add(model);
+            if (res > 0)
+                return Redirect("/admin/sys/Permission?ok");
+            else
+                return Redirect("/admin/sys/Permission?error");
+        
+        }
 
         /// <summary>
         /// 删除权限
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public ActionResult DeletePermission(int ID)
+        [HttpGet]
+        public ActionResult DelPemission(int ID)
         {
-     
             int res = OperateContext.Current.BLLSession.IOu_PermissionBLL.DelBy(p=>p.pid == ID);
-            if (res>0)
-            {
-      
-            }
-            return Content("");
+            if (res > 0)
+                return OperateContext.Current.RedirectAjax("ok", "删除成功~~~", null, "");
+            else
+                return Redirect("/admin/sys/Permission?error");
         
         }
 
+        /// <summary>
+        /// 设置编辑页面的下拉框
+        /// </summary>
        void SetDropdownList()
         {
             //准备请求方式下拉框数据

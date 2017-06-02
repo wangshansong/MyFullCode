@@ -34,43 +34,42 @@
         <tr>
             <td>@Html.LabelFor(p => p.pControllerName)</td>
             <td>@Html.TextBoxFor(p => p.pControllerName)</td>
-            <td>@Html.ValidationMessageFor(p => p.pControllerName)</td>
+            <td></td>
         </tr>
         @*Action名称*@
         <tr>
             <td>@Html.LabelFor(p => p.pActionName)</td>
             <td>@Html.TextBoxFor(p => p.pActionName)</td>
-            <td>@Html.ValidationMessageFor(p => p.pActionName)</td>
+            <td></td>
         </tr>
         @*访问方式get/post*@
         <tr>
             <td>@Html.LabelFor(p => p.pFormMethod)</td>
             <td>@Html.DropDownListFor(p => p.pFormMethod, ViewBag.httpMethodList as IEnumerable<SelectListItem>)</td>
-            <td>@Html.ValidationMessageFor(p => p.pFormMethod)</td>
+            <td></td>
         </tr>
         @*操作方式*@
         <tr>
             <td>@Html.LabelFor(p => p.pOperationType)</td>
             <td>@Html.DropDownListFor(p => p.pOperationType, ViewBag.operationList as IEnumerable<SelectListItem>)</td>
-            <td>@Html.ValidationMessageFor(p => p.pOperationType)</td>
+            <td></td>
         </tr>
         @*排序序号*@
         <tr>
             <td>@Html.LabelFor(p => p.pOrder)</td>
             <td>@Html.TextBoxFor(p => p.pOrder)</td>
-            <td>@Html.ValidationMessageFor(p => p.pOrder)</td>
+            <td></td>
         </tr>
         @*是否显示*@
         <tr>
             <td>@Html.LabelFor(p => p.pIsShow)</td>
-            <td>@Html.TextBoxFor(p => p.pIsShow)</td>
-            <td>@Html.ValidationMessageFor(p => p.pIsShow)</td>
+            <td>@Html.CheckBoxFor(p => p.pIsShow)</td>
+            <td></td>
         </tr>
         @*备注*@
         <tr>
             <td>@Html.LabelFor(p => p.pRemark)</td>
             <td>@Html.TextBoxFor(p => p.pRemark)</td>
-            <td>@Html.ValidationMessageFor(p => p.pRemark)</td>
         </tr>
         <tr>
             <td colspan="3">

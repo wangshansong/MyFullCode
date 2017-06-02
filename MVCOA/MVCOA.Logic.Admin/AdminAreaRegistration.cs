@@ -20,6 +20,8 @@ namespace MVCOA.Logic.Admin
                 new { action = "Admin", id = UrlParameter.Optional },
                 new string[1] { "MVCOA.Logic.Admin" }
             );
+
+         
         }
     }
 }
