@@ -111,7 +111,7 @@ namespace MVCOA.Logic.Admin
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         public ActionResult DelPemission(int ID)
         {
             int res = OperateContext.Current.BLLSession.IOu_PermissionBLL.DelBy(p=>p.pid == ID);

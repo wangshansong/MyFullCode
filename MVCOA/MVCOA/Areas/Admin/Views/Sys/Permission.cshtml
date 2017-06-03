@@ -116,9 +116,13 @@
             }
             $.messager.confirm('确认', '您确认想要删除记录吗？', function (r) {
                 if (r) {
-                    $.get("/admin/sys/DelPemission/" + rowData.pid, null, function (data) {
-                        
-                    })
+                    //$.get("/admin/sys/DelPemission/" + rowData.pid, null, function (data) {
+                    //    alert(data);
+                    //})
+
+                    $.post("/admin/sys/DelPemission/", { "id": rowData.pid }, function (data) {
+                        alert(data);
+                    }, "JSON")
                 }
             });
         }
