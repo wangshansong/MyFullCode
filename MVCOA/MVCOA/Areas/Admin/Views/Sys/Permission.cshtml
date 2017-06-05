@@ -92,6 +92,7 @@
 
             //载入远程 HTML 文件代码并插入至 DOM 中。
             //$("#modifyForm").load("/admin/sys/editpermission/" + rowData.pid, null, null);
+
             $.get("/admin/sys/editpermission/" + rowData.pid, null, function (data) {
                 if (checkIsJSON(data)) {
                     var result = JSON.parse(data);//将Json字符串转成对象   
@@ -116,10 +117,6 @@
             }
             $.messager.confirm('确认', '您确认想要删除记录吗？', function (r) {
                 if (r) {
-                    //$.get("/admin/sys/DelPemission/" + rowData.pid, null, function (data) {
-                    //    alert(data);
-                    //})
-
                     $.post("/admin/sys/DelPemission/", { "id": rowData.pid }, function (data) {
                         alert(data);
                     }, "JSON")
