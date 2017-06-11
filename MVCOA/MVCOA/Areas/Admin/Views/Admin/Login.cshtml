@@ -27,8 +27,9 @@
     @Scripts.Render("~/mvcAjax")    @*请求BundleConfig.cs中mvcAjax合并的脚本*@
     <script type="text/javascript">
         //成功时调用，接收控制的返回值
-        function Success(josnData) {
-            $.procAjaxData(josnData, function (backData) { window.location = backData.BackUrl; });
+        function Success(data) {
+            jsonData = JSON.parse(data);
+            $.procAjaxData(jsonData, function (jsonData) { window.location = jsonData.BackUrl; });
         }
     </script>
 </head>

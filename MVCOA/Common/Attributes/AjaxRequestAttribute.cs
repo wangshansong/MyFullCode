@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common.Attributes
 {
+
     public class AjaxRequestAttribute : Attribute
     {
     }

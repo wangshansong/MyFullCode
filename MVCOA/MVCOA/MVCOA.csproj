@@ -474,6 +474,7 @@
     <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Sys\Permission.cshtml" />
     <Content Include="Areas\Admin\Views\Sys\EditPermission.cshtml" />
+    <Content Include="Areas\Admin\Views\Sys\PermissionSon.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />

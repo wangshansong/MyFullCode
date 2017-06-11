@@ -3,37 +3,33 @@
 //依赖于jQuery文件 如：jquery.min.js
 (function ($) {
     $.extend($, {
-        //procAjaxData追加在JQuery对象中，用于全局Ajax返回消息的处理
+        //显示消息：如果有easyui，则调用easyui的message组件显示消息
+        alertMsg: function (msg, title, funcSuc) {
+            //error,question,info,warning
+            if ($.messager) {
+                $.messager.alert(title, msg, "info", function () {
+                    if (funcSuc) funcSuc();
+                });
+            } else {
+                alert(title + "\r\n     " + msg);
+                if (funcSuc) funcSuc();
+            }
+        },
+        //统一处理 返回的json数据格式
         procAjaxData: function (data, funcSuc, funcErr) {
-            dataObj = JSON.parse(data);
-            if (!dataObj) {
+            if (!data || !data.Statu) {
                 return;
             }
-            switch (dataObj.Statu) {
+
+            switch (data.Statu) {
                 case "ok":
-                    alert("OK:" + dataObj.Msg);
-                    if (funcSuc) funcSuc(dataObj);
+                    $.alertMsg(data.Msg, "系统提示", function () { funcSuc(data); });
                     break;
                 case "err":
-                    alert("ERR:" + dataObj.Msg);
-                    if (funcErr) funcErr(dataObj);
+                    $.alertMsg(data.Msg, "系统提示", function () { funcErr(data); });
                     break;
                 case "nologin":
-                    alert(dataObj.Msg);
-                    $.alertMsg(data.Msg, "系统提示", function () {
-                        if (window.top) //如果有父窗口，则跳转到最顶层的父窗口
-                            window.top.location = data.BackUrl;
-                        else
-                            window.location = data.BackUrl;
-                    });
-                case "noPermission":
-                    alert(dataObj.Msg);
-                    $.alertMsg(data.Msg, "系统提示", function () {
-                        if (window.top) //如果有父窗口，则跳转到最顶层的父窗口
-                            window.top.location = data.BackUrl;
-                        else
-                            window.location = data.BackUrl;
-                    });
+                    $.alertMsg(data.Msg, "系统提示", function () { if (window.top) window.top.location = data.BackUrl; else window.location = data.BackUrl; });
                     break;
             }
         }
